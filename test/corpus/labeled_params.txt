@@ -1,0 +1,44 @@
+================================================================================
+Handler with given clause
+================================================================================
+
+to greet given name:theName
+end greet
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function
+      (keyword_handler_to))
+    name: (identifier)
+    (given_clause
+      (labeled_parameter
+        label: (identifier)
+        name: (identifier)))
+    (keyword_end)
+    (identifier)))
+
+================================================================================
+Handler with multiple labeled parameters
+================================================================================
+
+to greet given name:theName, age:theAge
+end greet
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function
+      (keyword_handler_to))
+    name: (identifier)
+    (given_clause
+      (labeled_parameter
+        label: (identifier)
+        name: (identifier))
+      (labeled_parameter
+        label: (identifier)
+        name: (identifier)))
+    (keyword_end)
+    (identifier)))

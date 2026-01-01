@@ -1,0 +1,21 @@
+================================================================================
+Using terms from block
+================================================================================
+
+using terms from application "Finder"
+    set x to 1
+end using terms from
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (using_terms_block
+    keyword: (keyword_using_terms_from)
+    source: (reference
+      (keyword_application)
+      (string))
+    (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))
+    (keyword_end)))

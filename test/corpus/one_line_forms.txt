@@ -1,0 +1,72 @@
+================================================================================
+One-line tell statement
+================================================================================
+
+tell application "Finder" to activate
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (tell_simple_statement
+    keyword: (keyword_tell)
+    target: (reference
+      (keyword_application)
+      (string))
+    (keyword_to)
+    action: (command_call
+      command: (command_name))))
+
+================================================================================
+One-line tell with set
+================================================================================
+
+tell application "System Events" to set x to 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (tell_simple_statement
+    keyword: (keyword_tell)
+    target: (reference
+      (keyword_application)
+      (string))
+    (keyword_to)
+    action: (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))))
+
+================================================================================
+One-line if statement
+================================================================================
+
+if true then return 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_simple_statement
+    keyword: (keyword_if)
+    condition: (boolean)
+    (keyword_then)
+    then_action: (return_statement
+      (keyword_return)
+      (number))))
+
+================================================================================
+One-line if with expression
+================================================================================
+
+if x then set y to 5
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_simple_statement
+    keyword: (keyword_if)
+    condition: (identifier)
+    (keyword_then)
+    then_action: (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))))
