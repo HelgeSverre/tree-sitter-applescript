@@ -1,0 +1,56 @@
+================================================================================
+Simple handler
+================================================================================
+
+on sayHello()
+end sayHello
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function)
+    name: (identifier)
+    (parameter_list)
+    (keyword_end)
+    (identifier)))
+
+================================================================================
+Handler with parameters
+================================================================================
+
+on greet(name, age)
+    return name
+end greet
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function)
+    name: (identifier)
+    (parameter_list
+      (identifier)
+      (identifier))
+    (return_statement
+      (keyword_return)
+      (identifier))
+    (keyword_end)
+    (identifier)))
+
+================================================================================
+Handler using to keyword
+================================================================================
+
+to doSomething()
+end doSomething
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function)
+    name: (identifier)
+    (parameter_list)
+    (keyword_end)
+    (identifier)))

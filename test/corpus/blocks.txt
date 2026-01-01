@@ -1,0 +1,209 @@
+================================================================================
+Tell block
+================================================================================
+
+tell application "Finder"
+    set x to 1
+end tell
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (tell_block
+    keyword: (keyword_tell)
+    (reference
+      (keyword_application)
+      (string))
+    (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))
+    (keyword_end)))
+
+================================================================================
+If block
+================================================================================
+
+if true then
+    return 1
+end if
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_block
+    keyword: (keyword_if)
+    condition: (boolean)
+    (keyword_then)
+    (return_statement
+      (keyword_return)
+      (number))
+    (keyword_end)))
+
+================================================================================
+If else block
+================================================================================
+
+if true then
+    return 1
+else
+    return 2
+end if
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_block
+    keyword: (keyword_if)
+    condition: (boolean)
+    (keyword_then)
+    (return_statement
+      (keyword_return)
+      (number))
+    (else_clause
+      (keyword_else)
+      (return_statement
+        (keyword_return)
+        (number)))
+    (keyword_end)))
+
+================================================================================
+If else if else block
+================================================================================
+
+if true then
+    return 1
+else if false then
+    return 2
+else
+    return 3
+end if
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_block
+    keyword: (keyword_if)
+    condition: (boolean)
+    (keyword_then)
+    (return_statement
+      (keyword_return)
+      (number))
+    (else_if_clause
+      (keyword_else_if)
+      condition: (boolean)
+      (keyword_then)
+      (return_statement
+        (keyword_return)
+        (number)))
+    (else_clause
+      (keyword_else)
+      (return_statement
+        (keyword_return)
+        (number)))
+    (keyword_end)))
+
+================================================================================
+Repeat block
+================================================================================
+
+repeat
+    set x to 1
+end repeat
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (repeat_block
+    keyword: (keyword_repeat)
+    (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))
+    (keyword_end)))
+
+================================================================================
+Try block
+================================================================================
+
+try
+    set x to 1
+on error
+    return false
+end try
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (try_block
+    keyword: (keyword_try)
+    (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))
+    (error_handler
+      (keyword_on_error)
+      (return_statement
+        (keyword_return)
+        (boolean)))
+    (keyword_end)))
+
+================================================================================
+Script block
+================================================================================
+
+script MyScript
+    property name : "Test"
+end script
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (script_block
+    keyword: (keyword_script)
+    name: (identifier)
+    (property_declaration
+      (keyword_property)
+      name: (identifier)
+      value: (string))
+    (keyword_end)))
+
+================================================================================
+Considering block
+================================================================================
+
+considering case
+    set x to 1
+end considering
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (considering_block
+    keyword: (keyword_considering)
+    (text_attribute)
+    (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))
+    (keyword_end)))
+
+================================================================================
+With timeout block
+================================================================================
+
+with timeout of 30 seconds
+    set x to 1
+end timeout
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (timeout_block
+    keyword: (keyword_with_timeout)
+    (number)
+    (set_statement
+      (keyword_set)
+      variable: (identifier)
+      value: (number))
+    (keyword_end)))
