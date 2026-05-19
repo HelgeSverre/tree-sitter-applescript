@@ -54,6 +54,9 @@ module.exports = grammar({
     [$.bare_objc_call, $._expression],
     [$.objc_handler_definition, $._expression, $.compound_name],
     [$.bare_objc_call, $._expression, $.compound_name],
+    // `with transaction <expr>` — the optional session expression is
+    // ambiguous with the start of the body; let GLR keep both interpretations.
+    [$.transaction_block, $._item],
   ],
 
   rules: {
@@ -75,6 +78,7 @@ module.exports = grammar({
         $.considering_block,
         $.ignoring_block,
         $.timeout_block,
+        $.transaction_block,
         $.using_terms_block,
         $.use_statement,
         $.property_declaration,
@@ -156,6 +160,7 @@ module.exports = grammar({
           $.objc_handler_definition
         )
       ),
+
 
     objc_handler_definition: ($) =>
       prec.right(seq(
@@ -427,13 +432,14 @@ module.exports = grammar({
 
     // ==================== CONSIDERING/IGNORING BLOCKS ====================
 
-    // Considering block: considering attribute [, attribute]... ... end considering
+    // Considering block: `considering A, B [but ignoring C, D] ... end considering`
     considering_block: ($) =>
       prec.right(
         seq(
           field("keyword", $.keyword_considering),
           $.text_attribute,
-          repeat(seq(",", $.text_attribute)),
+          repeat(seq(token(choice(",", ci("and"))), $.text_attribute)),
+          optional($.but_ignoring_clause),
           repeat($._item),
           $.keyword_end,
           optional(token(ci("considering")))
@@ -442,13 +448,14 @@ module.exports = grammar({
 
     keyword_considering: ($) => token(ci("considering")),
 
-    // Ignoring block: ignoring attribute [, attribute]... ... end ignoring
+    // Ignoring block: `ignoring A, B [but considering C, D] ... end ignoring`
     ignoring_block: ($) =>
       prec.right(
         seq(
           field("keyword", $.keyword_ignoring),
           $.text_attribute,
-          repeat(seq(",", $.text_attribute)),
+          repeat(seq(token(choice(",", ci("and"))), $.text_attribute)),
+          optional($.but_considering_clause),
           repeat($._item),
           $.keyword_end,
           optional(token(ci("ignoring")))
@@ -456,6 +463,22 @@ module.exports = grammar({
       ),
 
     keyword_ignoring: ($) => token(ci("ignoring")),
+
+    // `but ignoring X` and `but considering X` modifiers on the head of a
+    // `considering` or `ignoring` block.
+    but_ignoring_clause: ($) =>
+      seq(
+        token(seq(ci("but"), /\s+/, ci("ignoring"))),
+        $.text_attribute,
+        repeat(seq(token(choice(",", ci("and"))), $.text_attribute))
+      ),
+
+    but_considering_clause: ($) =>
+      seq(
+        token(seq(ci("but"), /\s+/, ci("considering"))),
+        $.text_attribute,
+        repeat(seq(token(choice(",", ci("and"))), $.text_attribute))
+      ),
 
     text_attribute: ($) =>
       token(
@@ -465,6 +488,8 @@ module.exports = grammar({
           ci("hyphens"),
           ci("punctuation"),
           ci("white space"),
+          seq(ci("numeric"), /\s+/, ci("strings")),
+          ci("expansion"),
           seq(ci("application"), /\s+/, ci("responses"))
         )
       ),
@@ -486,6 +511,24 @@ module.exports = grammar({
       ),
 
     keyword_with_timeout: ($) => token(seq(ci("with"), /\s+/, ci("timeout"))),
+
+    // ==================== TRANSACTION BLOCK ====================
+
+    // With transaction block: `with transaction [<session>] ... end transaction`
+    // Bundles Apple events into a single atomic operation for apps that
+    // support transactional updates (rare; used in database-style scripting).
+    transaction_block: ($) =>
+      prec.right(
+        seq(
+          field("keyword", $.keyword_with_transaction),
+          optional(field("session", $._expression)),
+          repeat($._item),
+          $.keyword_end,
+          optional(token(ci("transaction")))
+        )
+      ),
+
+    keyword_with_transaction: ($) => token(seq(ci("with"), /\s+/, ci("transaction"))),
 
     // ==================== USING TERMS FROM BLOCK ====================
 
@@ -665,7 +708,9 @@ module.exports = grammar({
           seq(ci("list"), /\s+/, ci("disks")),
           seq(ci("system"), /\s+/, ci("info")),
           seq(ci("system"), /\s+/, ci("attribute")),
-          seq(ci("current"), /\s+/, ci("date")),
+          // `current date` is intentionally not listed here — it's modelled
+          // as a built-in expression (`current_date`) so it can participate
+          // in arithmetic (`current date + 5 * days`).
           seq(ci("time"), /\s+/, ci("to"), /\s+/, ci("GMT")),
           seq(ci("random"), /\s+/, ci("number")),
           seq(ci("round")),
@@ -827,7 +872,40 @@ module.exports = grammar({
           $.raw_data,
           $.my_expression,
           $.handler_call,
+          $.applescript_constant,
           $.identifier
+        )
+      ),
+
+    // AppleScript's built-in constants: scalar values (`pi`), whitespace
+    // characters (`space`, `tab`, `return`, `linefeed`, `quote`, `null`),
+    // weekday names (`Monday`–`Sunday`), month names (`January`–`December`),
+    // and time-unit constants used in date arithmetic (`seconds`, `minutes`,
+    // `hours`, `days`, `weeks`). Listing these explicitly makes them
+    // highlight as constants rather than plain identifiers.
+    applescript_constant: ($) =>
+      token(
+        choice(
+          // Scalar constants
+          ci("pi"),
+          // Whitespace and character constants. `return` is intentionally
+          // omitted — it's already the return-statement keyword and adding it
+          // here creates a lexer collision.
+          ci("space"),
+          ci("tab"),
+          ci("linefeed"),
+          ci("quote"),
+          // `null` is already covered by `null_value`; keep that one
+          // canonical and don't list it here.
+          // Days of week
+          ci("Monday"), ci("Tuesday"), ci("Wednesday"), ci("Thursday"),
+          ci("Friday"), ci("Saturday"), ci("Sunday"),
+          // Months
+          ci("January"), ci("February"), ci("March"), ci("April"),
+          ci("May"), ci("June"), ci("July"), ci("August"),
+          ci("September"), ci("October"), ci("November"), ci("December"),
+          // Time-unit constants for date arithmetic
+          ci("seconds"), ci("minutes"), ci("hours"), ci("days"), ci("weeks")
         )
       ),
 
