@@ -334,8 +334,13 @@ module.exports = grammar({
     // single tail action — deliberately restricted so a multi-line if-block
     // body (which often starts with `set_statement` / `command_call`) doesn't
     // accidentally match here and orphan the `end if`. The trade-off is that
-    // a true one-liner like `if x then set y to 5` parses as an `if_block`
-    // with a missing `end if`, which is suboptimal but uncommon in practice.
+    // a true one-liner like `if x then set y to 5` or `if x then say "hi"`
+    // parses as an `if_block` with a missing `end if`. Confirmed: adding
+    // `set_statement`/`command_call`/`copy_statement` here causes ~14 files
+    // in the realworld corpus to regress (multi-line `if … then\ncommand\n…
+    // end if` blocks commit to the one-line form before the parser reaches
+    // `end if`, even with `prec.dynamic` on `if_block`). One-liners using
+    // command-call tails should be quarantined or rewritten in tests.
     if_simple_statement: ($) =>
       prec.right(
         1,

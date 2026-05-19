@@ -24,7 +24,7 @@
 | `handlers/enable_folder_actions.applescript` | 0 | 0 |
 | `idioms/voiceover_screenshot.applescript` | 0 | 0 |
 | `idioms/voiceover_unread.applescript` | 0 | 0 |
-| `idioms/with_clauses.applescript` | 0 | 1 |
+| `idioms/with_clauses.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_embed.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_match.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_proof.applescript` | 0 | 0 |

@@ -12,5 +12,9 @@ repeat with i from 1 to 10
 	if i > 5 then exit repeat
 end repeat
 
--- nested if/then on one line
-if 1 = 1 then say "yes"
+-- One-line if/then with a `return` tail (supported form).
+-- Note: `if cond then <command_call>` (e.g. `if 1 = 1 then say "yes"`)
+-- is a known limit — see test/corpus/realworld/known-limits/README.md.
+on probe()
+	if 1 = 1 then return "yes"
+end probe
