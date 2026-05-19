@@ -10,8 +10,7 @@ set |the user's name| to "Jane"
   (set_statement
     (keyword_set)
     variable: (piped_identifier)
-    (keyword_to)
-    (string)))
+    value: (string)))
 
 ================================================================================
 Piped identifier in property access
@@ -25,8 +24,7 @@ set x to |class| of theItem
   (set_statement
     (keyword_set)
     variable: (identifier)
-    (keyword_to)
-    (property_reference
+    value: (property_reference
       (compound_name
         (piped_identifier))
       (identifier))))

@@ -31,6 +31,7 @@
 enum TokenType {
     BLOCK_COMMENT,
     ALIAS_PREFIX,
+    PIPED_IDENTIFIER,
 };
 
 void *tree_sitter_applescript_external_scanner_create(void) { return NULL; }
@@ -159,6 +160,31 @@ static bool scan_alias_prefix(TSLexer *lexer) {
     return true;
 }
 
+// Scan |name with any chars except |, newline, or EOF|. The caller must have
+// confirmed the lookahead is '|'. Returns true (and sets PIPED_IDENTIFIER)
+// only on a successfully closed `|...|`. A newline or EOF inside the bars
+// causes rejection so we don't silently swallow the rest of the file.
+// Empty `||` is rejected — AppleScript doesn't allow zero-length names.
+static bool scan_piped_identifier(TSLexer *lexer) {
+    if (lexer->lookahead != '|') return false;
+    advance(lexer);  // consume opening |
+
+    bool saw_any = false;
+    while (!lexer->eof(lexer)) {
+        int32_t c = lexer->lookahead;
+        if (c == '\n' || c == '\r') return false;  // unterminated
+        if (c == '|') {
+            if (!saw_any) return false;  // empty `||` is not an identifier
+            advance(lexer);  // consume closing |
+            lexer->result_symbol = PIPED_IDENTIFIER;
+            return true;
+        }
+        saw_any = true;
+        advance(lexer);
+    }
+    return false;  // EOF before closing |
+}
+
 bool tree_sitter_applescript_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
     (void)payload;
 
@@ -186,6 +212,10 @@ bool tree_sitter_applescript_external_scanner_scan(void *payload, TSLexer *lexer
     if (valid_symbols[ALIAS_PREFIX] &&
         (lexer->lookahead == 'a' || lexer->lookahead == 'A')) {
         return scan_alias_prefix(lexer);
+    }
+
+    if (valid_symbols[PIPED_IDENTIFIER] && lexer->lookahead == '|') {
+        return scan_piped_identifier(lexer);
     }
 
     return false;

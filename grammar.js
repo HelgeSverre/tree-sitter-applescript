@@ -31,6 +31,7 @@ module.exports = grammar({
   externals: ($) => [
     $.block_comment,
     $.alias_prefix,
+    $.piped_identifier,
   ],
 
   // Treat `identifier` as the canonical "word" rule so every `ci(...)` keyword
@@ -67,6 +68,19 @@ module.exports = grammar({
     // `with transaction <expr>` — the optional session expression is
     // ambiguous with the start of the body; let GLR keep both interpretations.
     [$.transaction_block, $._item],
+    // A bare `piped_identifier` can be either an `_expression` (e.g. as the
+    // first word of a statement) or a `_name_ref` (the first word of a
+    // multi-word `compound_name`). GLR keeps both alive until the next token
+    // disambiguates, mirroring the existing $.identifier path.
+    [$._expression, $._name_ref],
+    // Inside a Folder-Action handler header, the bare identifier after the
+    // event may be the folder-name parameter or the start of a compound_name
+    // body item — same shape as the existing handler_definition vs _expression
+    // conflict, but with _name_ref now in the mix.
+    [$.handler_definition, $._expression, $._name_ref],
+    // Same ambiguity as above for ObjC-bridge handlers: the tail identifier
+    // after `:arg` can be another selector word or the start of the body.
+    [$.objc_handler_definition, $._expression, $._name_ref],
   ],
 
   rules: {
@@ -221,13 +235,22 @@ module.exports = grammar({
 
     keyword_end: ($) => token(ci("end")),
 
+    // Forced move: once `piped_identifier` reaches `$._expression`, the
+    // header `on greet(name, age)` becomes GLR-ambiguous — `(name, age)`
+    // could also parse as a `parenthesized_expression` (or comma-separated
+    // expression list) since `name` and `age` are valid expressions. The
+    // dynamic precedence resolves in favour of `parameter_list` whenever
+    // the surrounding context is a handler header.
     parameter_list: ($) =>
-      prec(
-        2,
-        seq(
-          "(",
-          optional(seq($.identifier, repeat(seq(",", $.identifier)))),
-          ")"
+      prec.dynamic(
+        10,
+        prec(
+          2,
+          seq(
+            "(",
+            optional(seq($._name_ref, repeat(seq(",", $._name_ref)))),
+            ")"
+          )
         )
       ),
 
@@ -243,7 +266,7 @@ module.exports = grammar({
       seq(
         field("label", $.identifier),
         ":",
-        field("name", $.identifier)
+        field("name", $._name_ref)
       ),
 
     // ==================== SCRIPT OBJECTS ====================
@@ -438,8 +461,8 @@ module.exports = grammar({
       prec(
         2,
         choice(
-          seq($.identifier, optional(seq(token(ci("number")), $.identifier))),
-          seq(token(ci("number")), $.identifier)
+          seq($._name_ref, optional(seq(token(ci("number")), $._name_ref))),
+          seq(token(ci("number")), $._name_ref)
         )
       ),
 
@@ -603,7 +626,7 @@ module.exports = grammar({
     property_declaration: ($) =>
       seq(
         $.keyword_property,
-        field("name", $.identifier),
+        field("name", $._name_ref),
         ":",
         field("value", $._expression)
       ),
@@ -616,8 +639,8 @@ module.exports = grammar({
     global_declaration: ($) =>
       seq(
         $.keyword_global,
-        $.identifier,
-        repeat(seq(",", $.identifier))
+        $._name_ref,
+        repeat(seq(",", $._name_ref))
       ),
 
     keyword_global: ($) => token(ci("global")),
@@ -626,8 +649,8 @@ module.exports = grammar({
     local_declaration: ($) =>
       seq(
         $.keyword_local,
-        $.identifier,
-        repeat(seq(",", $.identifier))
+        $._name_ref,
+        repeat(seq(",", $._name_ref))
       ),
 
     keyword_local: ($) => token(ci("local")),
@@ -950,6 +973,11 @@ module.exports = grammar({
           $.applescript_constant,
           $.relative_reference,
           $.alias_expression,
+          // Piped identifiers are first-class expressions, not just name
+          // slots — `set X to |class|`, `display dialog |the message|`,
+          // etc. The `_name_ref` helper covers the inverse case (name-only
+          // slots like parameter lists where expressions would be wrong).
+          $.piped_identifier,
           $.identifier
         )
       ),
@@ -1345,12 +1373,12 @@ module.exports = grammar({
     // multi-word interpretation wins via the explicit conflict declaration.
     compound_name: ($) =>
       prec.right(seq(
-        choice($.identifier, $.element_type),
-        optional(choice($.identifier, $.element_type)),
-        optional(choice($.identifier, $.element_type)),
-        optional(choice($.identifier, $.element_type)),
-        optional(choice($.identifier, $.element_type)),
-        optional(choice($.identifier, $.element_type))
+        choice($._name_ref, $.element_type),
+        optional(choice($._name_ref, $.element_type)),
+        optional(choice($._name_ref, $.element_type)),
+        optional(choice($._name_ref, $.element_type)),
+        optional(choice($._name_ref, $.element_type)),
+        optional(choice($._name_ref, $.element_type))
       )),
 
     // Index expression: `item 1`, `window 2`, `paragraph 3 of foo`.
@@ -1553,6 +1581,14 @@ module.exports = grammar({
     // ==================== IDENTIFIERS & COMMENTS ====================
 
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+
+    // _name_ref: anywhere a plain $.identifier appears as a NAME slot
+    // (parameter, property declaration, variable in global/local/error).
+    // Piped identifiers ARE expressions, so for slots that already accept
+    // $._expression they fall through there; this helper is only for the
+    // name-only slots where $._expression would be wrong (e.g. parameter
+    // lists, property names — you don't want a string literal there).
+    _name_ref: ($) => choice($.identifier, $.piped_identifier),
 
     // Line comments only. Block comments `(* ... *)` are handled by the
     // external scanner so they can respect strings and nest.
