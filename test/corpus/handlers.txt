@@ -57,3 +57,24 @@ end doSomething
     (parameter_list)
     (keyword_end)
     (identifier)))
+
+================================================================================
+Idle handler with return interval
+================================================================================
+
+on idle
+    return 60
+end idle
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function
+      (keyword_on))
+    name: (identifier)
+    (return_statement
+      (keyword_return)
+      (number))
+    (keyword_end)
+    (identifier)))

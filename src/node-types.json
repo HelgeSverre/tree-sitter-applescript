@@ -1512,9 +1512,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "command_call",
+          "named": true
+        },
         {
           "type": "keyword_continue",
           "named": true

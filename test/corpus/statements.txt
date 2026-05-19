@@ -106,3 +106,29 @@ property myProp : "default value"
     (keyword_property)
     name: (identifier)
     value: (string)))
+
+================================================================================
+Continue with command (delegate to inherited handler)
+================================================================================
+
+continue activate
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (continue_statement
+    (keyword_continue)
+    (command_call
+      command: (command_name))))
+
+================================================================================
+Bare continue
+================================================================================
+
+continue
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (continue_statement
+    (keyword_continue)))

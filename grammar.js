@@ -696,8 +696,18 @@ module.exports = grammar({
 
     keyword_exit: ($) => token(ci("exit")),
 
-    // Continue statement
-    continue_statement: ($) => $.keyword_continue,
+    // Continue statement. Two forms:
+    //   `continue` — bare; rarely used (loop control in some scripts).
+    //   `continue <command_call>` — delegate to the inherited/parent
+    //     handler. Common idiom inside `using terms from` and script
+    //     objects with a `parent` clause:
+    //         on activate
+    //             continue activate
+    //         end activate
+    //     The argument is a full command_call so labelled parameters and
+    //     `with`/`without` flags pass through.
+    continue_statement: ($) =>
+      prec.right(seq($.keyword_continue, optional($.command_call))),
 
     keyword_continue: ($) => token(ci("continue")),
 

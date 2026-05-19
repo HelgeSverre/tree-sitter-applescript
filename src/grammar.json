@@ -3013,8 +3013,29 @@
       }
     },
     "continue_statement": {
-      "type": "SYMBOL",
-      "name": "keyword_continue"
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "keyword_continue"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "command_call"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "keyword_continue": {
       "type": "TOKEN",
