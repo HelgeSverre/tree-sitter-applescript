@@ -7728,34 +7728,6 @@
         ]
       }
     },
-    "escape_sequence": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "\\\\"
-          },
-          {
-            "type": "STRING",
-            "value": "\\\""
-          },
-          {
-            "type": "STRING",
-            "value": "\\n"
-          },
-          {
-            "type": "STRING",
-            "value": "\\r"
-          },
-          {
-            "type": "STRING",
-            "value": "\\t"
-          }
-        ]
-      }
-    },
     "number": {
       "type": "TOKEN",
       "content": {

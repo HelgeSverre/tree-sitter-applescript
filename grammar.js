@@ -1587,19 +1587,6 @@ module.exports = grammar({
         )
       ),
 
-    // Retained for `(escape_sequence) @string.escape` highlight queries even
-    // though `string` is now a single opaque token in the AST.
-    escape_sequence: ($) =>
-      token(
-        choice(
-          "\\\\",
-          '\\"',
-          "\\n",
-          "\\r",
-          "\\t"
-        )
-      ),
-
     // Numeric literal. Plain integer / real / exponential, OR an ordinal
     // form (`1st`, `2nd`, `23rd`, `101st`, `11th`) used as a synonym for
     // ordinal positional words (`first`, `second`, ...).
