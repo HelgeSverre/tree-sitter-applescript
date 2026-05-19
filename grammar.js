@@ -23,6 +23,16 @@ const ci = (word) => {
 module.exports = grammar({
   name: "applescript",
 
+  // External scanner (src/scanner.c) supplies two tokens that pure-grammar
+  // lexing can't represent:
+  //   - block_comment: `(* ... *)` that respects strings and nests.
+  //   - alias_prefix: `alias` only when NOT followed by `of`. Distinguishes
+  //     `copy alias "X" to y` (prefix) from `alias of theItem` (property).
+  externals: ($) => [
+    $.block_comment,
+    $.alias_prefix,
+  ],
+
   // Treat `identifier` as the canonical "word" rule so every `ci(...)` keyword
   // token only matches as a whole word. Without this, the lexer happily
   // tokenizes `me` inside `home`, `of` inside `office`, etc.
@@ -31,7 +41,7 @@ module.exports = grammar({
   // Note: `¬` (U+00AC) is AppleScript's line-continuation glyph, not logical
   // NOT (that's the keyword `not`). Treat as whitespace so a trailing `¬`
   // transparently joins the next line.
-  extras: ($) => [/\s/, /¬/, $.comment],
+  extras: ($) => [/\s/, /¬/, $.comment, $.block_comment],
 
   conflicts: ($) => [
     [$.record, $.list],
@@ -897,9 +907,18 @@ module.exports = grammar({
           $.handler_call,
           $.applescript_constant,
           $.relative_reference,
+          $.alias_expression,
           $.identifier
         )
       ),
+
+    // `alias <expr>` — produces an alias value from a path/string expression.
+    // The `alias` token is supplied by the external scanner (see scanner.c);
+    // it's only emitted when the next non-whitespace input is NOT `of`, so
+    // the property-reference form `alias of theItem` keeps parsing as a
+    // plain `property_reference(compound_name(alias), theItem)`.
+    alias_expression: ($) =>
+      prec.right(seq($.alias_prefix, $._expression)),
 
     // Relative reference forms from the AppleScript Language Guide:
     //   `<insertion-point> <base>`
@@ -1493,11 +1512,12 @@ module.exports = grammar({
 
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
+    // Line comments only. Block comments `(* ... *)` are handled by the
+    // external scanner so they can respect strings and nest.
     comment: ($) =>
       token(
         choice(
           seq("--", /.*/),
-          seq("(*", /[^*]*\*+([^)*][^*]*\*+)*/, ")"),
           seq("#!", /.*/)
         )
       ),

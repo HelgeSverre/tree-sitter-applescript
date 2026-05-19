@@ -1,5 +1,164 @@
 [
   {
+    "type": "alias_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
+          "type": "alias_prefix",
+          "named": true
+        },
+        {
+          "type": "applescript_constant",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "its_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "bare_objc_call",
     "named": true,
     "fields": {},
@@ -7,6 +166,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -164,6 +327,10 @@
       "types": [
         {
           "type": "additive_operator",
+          "named": true
+        },
+        {
+          "type": "alias_expression",
           "named": true
         },
         {
@@ -360,6 +527,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -514,6 +685,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "alias_expression",
+            "named": true
+          },
           {
             "type": "applescript_constant",
             "named": true
@@ -701,6 +876,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -880,6 +1059,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -1041,6 +1224,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -1324,6 +1511,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -1469,6 +1660,10 @@
         "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "alias_expression",
+            "named": true
+          },
           {
             "type": "applescript_constant",
             "named": true
@@ -1646,6 +1841,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -1906,6 +2105,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -2052,6 +2255,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -2315,6 +2522,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -2594,6 +2805,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -2813,6 +3028,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -2996,6 +3215,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -3284,6 +3507,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -3440,6 +3667,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -3712,6 +3943,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -3920,6 +4155,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -4193,6 +4432,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -4448,6 +4691,10 @@
       "required": false,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -4622,6 +4869,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -4776,6 +5027,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -4961,6 +5216,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -5221,6 +5480,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -5375,6 +5638,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -5554,6 +5821,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -5704,6 +5975,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -5859,6 +6134,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -6029,6 +6308,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -6191,6 +6474,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -6345,6 +6632,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -6520,6 +6811,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -6694,6 +6989,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -6844,6 +7143,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -7010,6 +7313,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -7275,6 +7582,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -7450,6 +7761,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -7714,6 +8029,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -7863,6 +8182,10 @@
         "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "alias_expression",
+            "named": true
+          },
           {
             "type": "applescript_constant",
             "named": true
@@ -8029,6 +8352,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -8299,6 +8626,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -8445,6 +8776,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -8705,6 +9040,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -8909,6 +9248,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -9179,6 +9522,10 @@
         "required": false,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -9325,6 +9672,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -9596,6 +9947,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -9859,6 +10214,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -10077,6 +10436,10 @@
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
             "type": "applescript_constant",
             "named": true
           },
@@ -10223,6 +10586,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "alias_expression",
+          "named": true
+        },
         {
           "type": "applescript_constant",
           "named": true
@@ -10483,6 +10850,10 @@
       "required": true,
       "types": [
         {
+          "type": "alias_expression",
+          "named": true
+        },
+        {
           "type": "applescript_constant",
           "named": true
         },
@@ -10654,7 +11025,15 @@
     "named": true
   },
   {
+    "type": "alias_prefix",
+    "named": true
+  },
+  {
     "type": "applescript_constant",
+    "named": true
+  },
+  {
+    "type": "block_comment",
     "named": true
   },
   {

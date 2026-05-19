@@ -4537,11 +4537,32 @@
             },
             {
               "type": "SYMBOL",
+              "name": "alias_expression"
+            },
+            {
+              "type": "SYMBOL",
               "name": "identifier"
             }
           ]
         }
       ]
+    },
+    "alias_expression": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "alias_prefix"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        ]
+      }
     },
     "relative_reference": {
       "type": "PREC_RIGHT",
@@ -7412,23 +7433,6 @@
             "members": [
               {
                 "type": "STRING",
-                "value": "(*"
-              },
-              {
-                "type": "PATTERN",
-                "value": "[^*]*\\*+([^)*][^*]*\\*+)*"
-              },
-              {
-                "type": "STRING",
-                "value": ")"
-              }
-            ]
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
                 "value": "#!"
               },
               {
@@ -7453,6 +7457,10 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "block_comment"
     }
   ],
   "conflicts": [
@@ -7521,7 +7529,16 @@
     ]
   ],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "block_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "alias_prefix"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }
