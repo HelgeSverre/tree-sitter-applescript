@@ -11,7 +11,7 @@ end tell
 (source_file
   (tell_block
     keyword: (keyword_tell)
-    (reference
+    target: (reference
       (keyword_application)
       (string))
     (set_statement

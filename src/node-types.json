@@ -36,6 +36,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -68,6 +72,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -76,11 +84,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -97,6 +113,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -143,6 +163,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -167,6 +191,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -175,11 +203,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -196,6 +232,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -246,6 +286,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -270,6 +314,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -278,11 +326,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -299,6 +355,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -376,6 +436,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -400,6 +464,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -408,11 +476,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -429,6 +505,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -476,6 +556,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -500,6 +584,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -508,11 +596,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -529,6 +625,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -602,6 +702,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_statement",
           "named": true
         },
@@ -666,6 +770,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -674,11 +782,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -699,6 +815,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -804,6 +924,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -828,6 +952,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -836,11 +964,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -857,6 +993,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -898,6 +1038,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -922,6 +1066,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -930,11 +1078,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -951,6 +1107,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -974,6 +1134,21 @@
       "types": [
         {
           "type": "keyword_copy",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "date_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -1021,6 +1196,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -1088,6 +1267,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -1096,11 +1279,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -1121,6 +1312,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -1207,6 +1402,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -1231,6 +1430,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -1239,11 +1442,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -1260,6 +1471,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -1315,6 +1530,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -1386,6 +1605,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -1394,11 +1617,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -1419,6 +1650,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -1521,6 +1756,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_parameters",
           "named": true
         },
@@ -1589,6 +1828,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -1597,11 +1840,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -1622,6 +1873,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -1723,6 +1978,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -1751,6 +2010,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -1759,11 +2022,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -1780,6 +2051,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -1912,6 +2187,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_statement",
           "named": true
         },
@@ -1980,11 +2259,19 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
         {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
           "named": true
         },
         {
@@ -1997,6 +2284,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -2017,6 +2308,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -2103,6 +2398,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -2127,6 +2426,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -2135,11 +2438,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -2156,6 +2467,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -2221,6 +2536,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -2300,6 +2619,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -2308,11 +2631,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -2333,6 +2664,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -2419,6 +2754,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -2443,6 +2782,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -2451,11 +2794,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -2472,6 +2823,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -2539,6 +2894,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "error_statement",
             "named": true
           },
@@ -2599,6 +2958,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -2607,11 +2970,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -2632,6 +3003,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -2756,6 +3131,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_statement",
           "named": true
         },
@@ -2820,6 +3199,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -2828,11 +3211,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -2853,6 +3244,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -2943,6 +3338,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "element_type",
           "named": true
         },
@@ -2971,6 +3370,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -2979,11 +3382,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3000,6 +3411,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -3146,6 +3561,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -3170,6 +3589,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3178,11 +3601,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3199,6 +3630,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -3264,6 +3699,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -3292,6 +3731,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3300,11 +3743,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3321,6 +3772,148 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "new_specifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "element_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "objc_selector_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -3367,6 +3960,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -3391,6 +3988,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3399,11 +4000,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3423,6 +4032,10 @@
           "named": true
         },
         {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
           "type": "result_reference",
           "named": true
         },
@@ -3436,6 +4049,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "whose_clause",
           "named": true
         }
       ]
@@ -3485,6 +4102,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -3509,6 +4130,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3517,11 +4142,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3538,6 +4171,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -3584,6 +4221,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -3608,6 +4249,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3616,11 +4261,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3637,6 +4290,133 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "possessive_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -3693,6 +4473,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -3717,6 +4501,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -3725,11 +4513,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -3746,6 +4542,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -3803,6 +4603,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -3827,6 +4631,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3835,11 +4643,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3856,6 +4672,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -3902,6 +4722,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "element_type",
           "named": true
         },
@@ -3930,6 +4754,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -3938,11 +4766,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -3963,6 +4799,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -4024,6 +4864,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -4048,6 +4892,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -4056,11 +4904,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -4077,6 +4933,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -4108,6 +4968,125 @@
         },
         {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reference_to_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -4166,6 +5145,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -4233,6 +5216,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -4241,11 +5228,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -4266,6 +5261,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -4357,6 +5356,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -4385,6 +5388,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -4393,11 +5400,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -4414,6 +5429,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -4497,6 +5516,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_statement",
           "named": true
         },
@@ -4561,11 +5584,19 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
         {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
           "named": true
         },
         {
@@ -4578,6 +5609,10 @@
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -4598,6 +5633,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -4684,6 +5723,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -4708,6 +5751,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -4716,11 +5763,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -4737,6 +5792,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -4778,6 +5837,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -4802,6 +5865,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -4810,11 +5877,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -4831,6 +5906,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -4904,6 +5983,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_statement",
           "named": true
         },
@@ -4964,6 +6047,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -4972,11 +6059,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -4997,6 +6092,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -5108,6 +6207,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -5132,6 +6235,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -5140,11 +6247,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -5161,6 +6276,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -5216,6 +6335,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -5283,6 +6406,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -5291,11 +6418,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -5316,6 +6451,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -5406,6 +6545,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -5430,6 +6573,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -5438,11 +6585,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -5459,6 +6614,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -5571,6 +6730,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_statement",
           "named": true
         },
@@ -5635,6 +6798,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -5643,11 +6810,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -5668,6 +6843,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -5781,6 +6960,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "error_handler",
           "named": true
         },
@@ -5849,6 +7032,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -5857,11 +7044,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -5882,6 +7077,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -5968,6 +7167,10 @@
           "named": true
         },
         {
+          "type": "date_literal",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -5992,6 +7195,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -6000,11 +7207,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -6021,6 +7236,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -6100,6 +7319,10 @@
             "named": true
           },
           {
+            "type": "date_literal",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -6124,6 +7347,10 @@
             "named": true
           },
           {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
             "type": "null_value",
             "named": true
           },
@@ -6132,11 +7359,19 @@
             "named": true
           },
           {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
             "type": "object_specifier",
             "named": true
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
             "named": true
           },
           {
@@ -6153,6 +7388,10 @@
           },
           {
             "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
             "named": true
           },
           {
@@ -6208,6 +7447,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
           "named": true
         },
         {
@@ -6275,6 +7518,10 @@
           "named": true
         },
         {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
           "type": "null_value",
           "named": true
         },
@@ -6283,11 +7530,19 @@
           "named": true
         },
         {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
           "type": "object_specifier",
           "named": true
         },
         {
           "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
           "named": true
         },
         {
@@ -6308,6 +7563,10 @@
         },
         {
           "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
           "named": true
         },
         {
@@ -6360,6 +7619,125 @@
         },
         {
           "type": "using_terms_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "whose_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -6531,6 +7909,10 @@
   },
   {
     "type": "parameter_name",
+    "named": true
+  },
+  {
+    "type": "possessive",
     "named": true
   },
   {

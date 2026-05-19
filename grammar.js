@@ -23,7 +23,15 @@ const ci = (word) => {
 module.exports = grammar({
   name: "applescript",
 
-  extras: ($) => [/\s/, $.comment],
+  // Treat `identifier` as the canonical "word" rule so every `ci(...)` keyword
+  // token only matches as a whole word. Without this, the lexer happily
+  // tokenizes `me` inside `home`, `of` inside `office`, etc.
+  word: ($) => $.identifier,
+
+  // Note: `¬` (U+00AC) is AppleScript's line-continuation glyph, not the
+  // logical NOT operator (that's the keyword `not`). Treat it as whitespace
+  // so a `¬` at the end of a line transparently joins the next line.
+  extras: ($) => [/\s/, /¬/, $.comment],
 
   conflicts: ($) => [
     [$.record, $.list],
@@ -645,8 +653,58 @@ module.exports = grammar({
         $.range_expression,
         $.coercion_expression,
         $.concatenation,
+        $.reference_to_expression,
+        $.date_literal,
+        $.objc_selector_call,
+        $.possessive_expression,
+        $.new_specifier,
         $.identifier
       ),
+
+    // `new <element_type>` — the argument shape used by `make`, e.g.
+    // `make new folder at … with properties {…}` and `make new document`.
+    new_specifier: ($) =>
+      prec.right(seq(token(ci("new")), $.element_type)),
+
+    // Possessive accessor: `x's y` — common in modern AppleScript and
+    // dominant in ASObjC (`current application's NSString`).
+    // Higher precedence than binary operators so `x's y + z` is `(x's y) + z`.
+    possessive_expression: ($) =>
+      prec.left(
+        7,
+        seq($._expression, $.possessive, $.identifier)
+      ),
+
+    // ObjC bridge method call: `receiver's selector:arg [label:arg ...]`.
+    // Slightly higher precedence than plain possessive so the `:arg` tail wins
+    // when present.
+    objc_selector_call: ($) =>
+      prec.left(
+        8,
+        seq(
+          $._expression,
+          $.possessive,
+          $.identifier,
+          ":",
+          $._expression,
+          repeat(seq($.identifier, ":", $._expression))
+        )
+      ),
+
+    possessive: ($) => token("'s"),
+
+    // `a reference to <expr>` — three-word prefix that wraps an expression
+    // as a live reference. Common in ASObjC: `property NS : a reference to current application's NSString`.
+    // Use a single multi-word token so a bare `a` identifier (`a or b`) is unaffected.
+    reference_to_expression: ($) =>
+      prec.right(seq(
+        token(seq(ci("a"), /\s+/, ci("reference"), /\s+/, ci("to"))),
+        $._expression
+      )),
+
+    // Date literal: `date "Saturday, January 1, 2000 at 12:00:00 AM"`
+    date_literal: ($) =>
+      seq(token(ci("date")), $.string),
 
     parenthesized_expression: ($) => seq("(", repeat($._expression), ")"),
 
@@ -706,7 +764,11 @@ module.exports = grammar({
           ci("contains"),
           ci("does not contain"),
           ci("starts with"),
+          ci("begins with"),
           ci("ends with"),
+          ci("does not start with"),
+          ci("does not begin with"),
+          ci("does not end with"),
           ci("is in"),
           ci("is not in")
         )
@@ -724,7 +786,7 @@ module.exports = grammar({
     unary_expression: ($) =>
       prec.right(6, seq($.unary_operator, $._expression)),
 
-    unary_operator: ($) => token(choice(ci("not"), "¬", "-")),
+    unary_operator: ($) => token(choice(ci("not"), "-")),
 
     // String concatenation
     concatenation: ($) =>
@@ -733,6 +795,7 @@ module.exports = grammar({
     // ==================== OBJECT SPECIFIERS ====================
 
     // Object specifier: window 1 of application "Finder"
+    // Optional trailing whose/where filter: every file of home whose size > 1000
     object_specifier: ($) =>
       prec.left(
         3,
@@ -740,9 +803,17 @@ module.exports = grammar({
           $.specifier_prefix,
           $._expression,
           token(ci("of")),
-          $._expression
+          $._expression,
+          optional($.whose_clause)
         )
       ),
+
+    // Filter clause for object specifiers: `every file whose name ends with ".txt"`
+    whose_clause: ($) =>
+      prec.right(seq(
+        token(choice(ci("whose"), ci("where"))),
+        $._expression
+      )),
 
     specifier_prefix: ($) =>
       token(
@@ -767,7 +838,10 @@ module.exports = grammar({
         )
       ),
 
-    // Property reference: name of theFile
+    // Property reference: `name of theFile`. Multi-word app-dictionary
+    // properties (e.g. `current view of window`) are not handled here —
+    // those require the application's `.sdef` dictionary that tree-sitter
+    // does not have access to.
     property_reference: ($) =>
       prec.left(
         3,

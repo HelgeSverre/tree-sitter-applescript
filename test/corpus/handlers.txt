@@ -9,7 +9,8 @@ end sayHello
 
 (source_file
   (handler_definition
-    keyword: (keyword_function)
+    keyword: (keyword_function
+      (keyword_on))
     name: (identifier)
     (parameter_list)
     (keyword_end)
@@ -27,7 +28,8 @@ end greet
 
 (source_file
   (handler_definition
-    keyword: (keyword_function)
+    keyword: (keyword_function
+      (keyword_on))
     name: (identifier)
     (parameter_list
       (identifier)
@@ -49,7 +51,8 @@ end doSomething
 
 (source_file
   (handler_definition
-    keyword: (keyword_function)
+    keyword: (keyword_function
+      (keyword_handler_to))
     name: (identifier)
     (parameter_list)
     (keyword_end)
