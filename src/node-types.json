@@ -4736,11 +4736,6 @@
     }
   },
   {
-    "type": "keyword_handler_to",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "keyword_if",
     "named": true,
     "fields": {}
@@ -11382,6 +11377,10 @@
   },
   {
     "type": "keyword_global",
+    "named": true
+  },
+  {
+    "type": "keyword_handler_to",
     "named": true
   },
   {

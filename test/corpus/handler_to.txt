@@ -10,7 +10,7 @@ end tell
 
 (source_file
   (tell_block
-    (keyword_tell)
+    keyword: (keyword_tell)
     target: (reference
       (keyword_application)
       (string))
@@ -19,9 +19,9 @@ end tell
       argument: (identifier)
       (command_parameter
         name: (parameter_name)
-        value: (identifier)))
-    (keyword_end)
-    (keyword_tell)))
+        value: (compound_name
+          (identifier))))
+    (keyword_end)))
 
 ================================================================================
 Handler definition with to at column 0

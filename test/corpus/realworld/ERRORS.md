@@ -1,6 +1,6 @@
 # Real-world corpus — current state
 
-**32 of 32 active files parse with zero ERROR and zero MISSING nodes.**
+**33 of 33 active files parse with zero ERROR and zero MISSING nodes.**
 
 ## Per-file ERROR counts
 
@@ -26,6 +26,7 @@
 | `idioms/voiceover_unread.applescript` | 0 | 0 |
 | `idioms/with_clauses.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_embed.applescript` | 0 | 0 |
+| `object_specifiers/colorsync_extract.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_match.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_proof.applescript` | 0 | 0 |
 | `object_specifiers/colorsync_set_info.applescript` | 0 | 0 |
@@ -41,7 +42,7 @@
 
 ## Quarantined files
 
-Four files have been moved to `known-limits/` because they exhibit parser
+Three files remain in `known-limits/` because they exhibit parser
 limitations that require external-scanner work beyond what landed this
 session. See [`known-limits/README.md`](known-limits/README.md) for the
 specific cause per file.
@@ -49,7 +50,6 @@ specific cause per file.
 | File | ERROR | MISSING |
 | --- | ---: | ---: |
 | `known-limits/attach_folder_action.applescript` | 3 | 0 |
-| `known-limits/colorsync_extract.applescript` | 2 | 0 |
 | `known-limits/comment_tags.applescript` | 2 | 0 |
 | `known-limits/remove_folder_actions.applescript` | 3 | 0 |
 
@@ -64,4 +64,5 @@ specific cause per file.
 | After commit `b3f40dd` (external scanner: block_comment + alias_prefix) | 10 | -98.6% |
 | After commit `dc093dc` (command_flag rule) | 10 | unchanged |
 | Quarantine 4 files into `known-limits/` | 0 (in active corpus) | — |
+| After commit `820980e` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
 

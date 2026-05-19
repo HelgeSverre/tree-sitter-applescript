@@ -750,13 +750,6 @@
         "value": "[oO][nN]"
       }
     },
-    "keyword_handler_to": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[tT][oO]"
-      }
-    },
     "keyword_function": {
       "type": "CHOICE",
       "members": [
@@ -7948,6 +7941,10 @@
     {
       "type": "SYMBOL",
       "name": "piped_identifier"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "keyword_handler_to"
     }
   ],
   "inline": [],

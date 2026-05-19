@@ -32,6 +32,7 @@ module.exports = grammar({
     $.block_comment,
     $.alias_prefix,
     $.piped_identifier,
+    $.keyword_handler_to,
   ],
 
   // Treat `identifier` as the canonical "word" rule so every `ci(...)` keyword
@@ -230,7 +231,6 @@ module.exports = grammar({
       ),
 
     keyword_on: ($) => token(ci("on")),
-    keyword_handler_to: ($) => token(ci("to")),
     keyword_function: ($) => choice($.keyword_on, $.keyword_handler_to),
 
     keyword_end: ($) => token(ci("end")),

@@ -32,6 +32,7 @@ enum TokenType {
     BLOCK_COMMENT,
     ALIAS_PREFIX,
     PIPED_IDENTIFIER,
+    KEYWORD_HANDLER_TO,
 };
 
 void *tree_sitter_applescript_external_scanner_create(void) { return NULL; }
@@ -185,6 +186,40 @@ static bool scan_piped_identifier(TSLexer *lexer) {
     return false;  // EOF before closing |
 }
 
+// `to` is overloaded in AppleScript. Recognise it as a HANDLER opener
+// only when it is at the start of a logical line (column 0) AND followed
+// by an identifier (or whitespace). `move x to trash` and `from N to M`
+// have `to` mid-line, so they fall through to the regular keyword.
+//
+// We deliberately don't peek ahead at the next word — the column check
+// alone disambiguates cleanly in practice. A user who writes a handler
+// header indented (rare but legal) will fall back to the regular `to`,
+// and the rest of the grammar still parses the header correctly because
+// `to` is allowed in non-handler positions too.
+static bool scan_keyword_handler_to(TSLexer *lexer) {
+    // Must be at column 0. tree-sitter's extras already consumed
+    // leading whitespace before we get here, so get_column reports the
+    // column of the FIRST non-whitespace character on the line — which
+    // for a handler opener is `t`.
+    if (lexer->get_column(lexer) != 0) return false;
+
+    // Match the word `to` case-insensitively.
+    const char target[] = {'t', 'o'};
+    for (int i = 0; i < 2; i++) {
+        int32_t c = lexer->lookahead;
+        if (c >= 'A' && c <= 'Z') c += 32;
+        if (c != target[i]) return false;
+        advance(lexer);
+    }
+
+    // Word boundary check — refuse to consume a partial token like `toString`.
+    int32_t after = lexer->lookahead;
+    if (after == '_' || iswalnum(after)) return false;
+
+    lexer->result_symbol = KEYWORD_HANDLER_TO;
+    return true;
+}
+
 bool tree_sitter_applescript_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
     (void)payload;
 
@@ -207,6 +242,13 @@ bool tree_sitter_applescript_external_scanner_scan(void *payload, TSLexer *lexer
         while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
             skip(lexer);
         }
+    }
+
+    if (valid_symbols[KEYWORD_HANDLER_TO] &&
+        (lexer->lookahead == 't' || lexer->lookahead == 'T')) {
+        if (scan_keyword_handler_to(lexer)) return true;
+        // Not at column 0 — fall through; the regular keyword_to from the
+        // grammar lexer handles non-handler `to`.
     }
 
     if (valid_symbols[ALIAS_PREFIX] &&
