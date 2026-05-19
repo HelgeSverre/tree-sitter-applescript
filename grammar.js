@@ -33,6 +33,7 @@ module.exports = grammar({
     $.alias_prefix,
     $.piped_identifier,
     $.keyword_handler_to,
+    $.inline_marker,
   ],
 
   // Treat `identifier` as the canonical "word" rule so every `ci(...)` keyword
@@ -364,6 +365,21 @@ module.exports = grammar({
     // end if` blocks commit to the one-line form before the parser reaches
     // `end if`, even with `prec.dynamic` on `if_block`). One-liners using
     // command-call tails should be quarantined or rewritten in tests.
+    // The `then` between condition and the tail is required to be
+    // followed by an external `inline_marker` token — emitted by the
+    // scanner only when the next non-extras token is on the SAME logical
+    // line as `then` (either physical-same-row, or reached through one
+    // or more `¬` continuations). This prevents the parser from matching
+    // multi-line `if … then\n  body\nend if` as an `if_simple_statement`
+    // (the bare newline case rejects the marker, so if_block wins). The
+    // regular `keyword_then` (no inline_marker requirement) is used by
+    // `if_block` and `else_if_clause`.
+    //
+    // Because the same-line constraint guarantees no multi-line if-block
+    // body can be mistaken for a one-liner tail, we can safely accept
+    // any `_item` as the tail — including `tell_simple_statement`,
+    // `command_call`, `set_statement`, etc. This makes idioms like
+    // `if cond then ¬\n  tell app to do X` parse correctly.
     if_simple_statement: ($) =>
       prec.right(
         1,
@@ -371,13 +387,8 @@ module.exports = grammar({
           field("keyword", $.keyword_if),
           field("condition", $._expression),
           $.keyword_then,
-          field("then_action", choice(
-            $.return_statement,
-            $.exit_statement,
-            $.continue_statement,
-            $.error_statement,
-            $.log_statement
-          ))
+          $.inline_marker,
+          field("then_action", $._item)
         )
       ),
 

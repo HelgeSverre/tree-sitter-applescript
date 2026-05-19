@@ -33,6 +33,7 @@ enum TokenType {
     ALIAS_PREFIX,
     PIPED_IDENTIFIER,
     KEYWORD_HANDLER_TO,
+    INLINE_MARKER,
 };
 
 void *tree_sitter_applescript_external_scanner_create(void) { return NULL; }
@@ -223,8 +224,77 @@ static bool scan_keyword_handler_to(TSLexer *lexer) {
     return true;
 }
 
+// `inline_marker` is a zero-width token emitted between `then` and the
+// one-liner tail of an `if_simple_statement`. It emits when the next
+// real character is on the same LOGICAL line — same physical row, or
+// reached via one-or-more `¬` (U+00AC) line-continuation glyphs each
+// followed by a newline and any indent. A bare newline (no `¬`) means
+// the tail is on a separate logical line and we refuse — forcing the
+// parser to use the `if_block` form instead.
+//
+// Zero-width — `mark_end` is called immediately so the resulting token
+// occupies no input. The lexer does advance past `¬`+newline+indent
+// sequences while checking (so the next lex sees the right position),
+// but that whitespace is normally consumed as `extras` anyway.
+static bool scan_inline_marker(TSLexer *lexer) {
+    lexer->mark_end(lexer);
+
+    for (;;) {
+        int32_t c = lexer->lookahead;
+        // EOF after `then` — no tail.
+        if (c == 0 && lexer->eof(lexer)) return false;
+        // `¬` line-continuation: skip it, the following newline, and
+        // any leading whitespace on the next line, then re-check.
+        if (c == 0x00AC) {
+            advance(lexer);
+            while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+                advance(lexer);
+            }
+            if (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
+                advance(lexer);
+                if (lexer->lookahead == '\n') advance(lexer);
+                while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+                    advance(lexer);
+                }
+            }
+            // `mark_end` stays at the original start — token remains
+            // zero-width — but the lexer position is now past the
+            // continuation. Continue the loop to check what comes next.
+            continue;
+        }
+        // Bare newline (no preceding ¬): tail is on a separate logical
+        // line; reject and let if_block take over.
+        if (c == '\n' || c == '\r') return false;
+        // Comment starters strongly suggest no inline tail.
+        if (c == '#') return false;
+        if (c == '-') {
+            // We can't distinguish `--` (comment) from `-N` (negative
+            // number) without consuming `-`, which would advance the
+            // lexer past it. Be conservative — reject. `if x then -5`
+            // is exotic.
+            return false;
+        }
+        if (c == '(') return false;
+
+        // Real character — accept.
+        lexer->result_symbol = INLINE_MARKER;
+        return true;
+    }
+}
+
 bool tree_sitter_applescript_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
     (void)payload;
+
+    // INLINE_MARKER is checked FIRST, before any newline-skipping, because
+    // its whole purpose is to detect a newline between `then` and the tail.
+    // We only skip spaces/tabs (not newlines) before delegating so that the
+    // marker sees the same lookahead any in-grammar token would see.
+    if (valid_symbols[INLINE_MARKER]) {
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            skip(lexer);
+        }
+        return scan_inline_marker(lexer);
+    }
 
     // For block_comment we MUST skip newlines — otherwise the internal lexer
     // races us to the first significant character and consumes `(` as a

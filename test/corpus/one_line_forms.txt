@@ -49,6 +49,7 @@ if true then return 1
     keyword: (keyword_if)
     condition: (boolean)
     (keyword_then)
+    (inline_marker)
     then_action: (return_statement
       (keyword_return)
       (number))))
@@ -66,6 +67,7 @@ if x then return 5
     keyword: (keyword_if)
     condition: (identifier)
     (keyword_then)
+    (inline_marker)
     then_action: (return_statement
       (keyword_return)
       (number))))

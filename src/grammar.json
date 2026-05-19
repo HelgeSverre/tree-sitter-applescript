@@ -1199,32 +1199,15 @@
             "name": "keyword_then"
           },
           {
+            "type": "SYMBOL",
+            "name": "inline_marker"
+          },
+          {
             "type": "FIELD",
             "name": "then_action",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "return_statement"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "exit_statement"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "continue_statement"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "error_statement"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "log_statement"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_item"
             }
           }
         ]
@@ -7945,6 +7928,10 @@
     {
       "type": "SYMBOL",
       "name": "keyword_handler_to"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "inline_marker"
     }
   ],
   "inline": [],

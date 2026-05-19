@@ -4215,11 +4215,63 @@
         ]
       },
       "then_action": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
+            "type": "alias_expression",
+            "named": true
+          },
+          {
+            "type": "applescript_constant",
+            "named": true
+          },
+          {
+            "type": "bare_objc_call",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "coercion_expression",
+            "named": true
+          },
+          {
+            "type": "command_call",
+            "named": true
+          },
+          {
+            "type": "concatenation",
+            "named": true
+          },
+          {
+            "type": "considering_block",
+            "named": true
+          },
+          {
             "type": "continue_statement",
+            "named": true
+          },
+          {
+            "type": "copy_statement",
+            "named": true
+          },
+          {
+            "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
+            "named": true
+          },
+          {
+            "type": "date_literal",
             "named": true
           },
           {
@@ -4231,20 +4283,204 @@
             "named": true
           },
           {
+            "type": "global_declaration",
+            "named": true
+          },
+          {
+            "type": "handler_call",
+            "named": true
+          },
+          {
+            "type": "handler_definition",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "if_block",
+            "named": true
+          },
+          {
+            "type": "if_simple_statement",
+            "named": true
+          },
+          {
+            "type": "ignoring_block",
+            "named": true
+          },
+          {
+            "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "it_reference",
+            "named": true
+          },
+          {
+            "type": "its_reference",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "local_declaration",
+            "named": true
+          },
+          {
             "type": "log_statement",
             "named": true
           },
           {
+            "type": "me_reference",
+            "named": true
+          },
+          {
+            "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
+            "named": true
+          },
+          {
+            "type": "new_specifier",
+            "named": true
+          },
+          {
+            "type": "null_value",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "objc_selector_call",
+            "named": true
+          },
+          {
+            "type": "object_specifier",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "piped_identifier",
+            "named": true
+          },
+          {
+            "type": "possessive_expression",
+            "named": true
+          },
+          {
+            "type": "property_declaration",
+            "named": true
+          },
+          {
+            "type": "property_reference",
+            "named": true
+          },
+          {
+            "type": "range_expression",
+            "named": true
+          },
+          {
+            "type": "raw_data",
+            "named": true
+          },
+          {
+            "type": "record",
+            "named": true
+          },
+          {
+            "type": "reference",
+            "named": true
+          },
+          {
+            "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
+            "named": true
+          },
+          {
+            "type": "repeat_block",
+            "named": true
+          },
+          {
+            "type": "result_reference",
+            "named": true
+          },
+          {
             "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "script_block",
+            "named": true
+          },
+          {
+            "type": "set_statement",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "tell_block",
+            "named": true
+          },
+          {
+            "type": "tell_simple_statement",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
+            "named": true
+          },
+          {
+            "type": "timeout_block",
+            "named": true
+          },
+          {
+            "type": "transaction_block",
+            "named": true
+          },
+          {
+            "type": "try_block",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "use_statement",
+            "named": true
+          },
+          {
+            "type": "using_terms_block",
             "named": true
           }
         ]
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "inline_marker",
+          "named": true
+        },
         {
           "type": "keyword_then",
           "named": true
@@ -11337,6 +11573,10 @@
   },
   {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "inline_marker",
     "named": true
   },
   {

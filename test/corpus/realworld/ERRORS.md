@@ -1,6 +1,6 @@
 # Real-world corpus — current state
 
-**34 of 34 active files parse with zero ERROR and zero MISSING nodes.**
+**35 of 35 active files parse with zero ERROR and zero MISSING nodes.**
 
 ## Per-file ERROR counts
 
@@ -12,6 +12,7 @@
 | `edge_cases/dates_and_continuation.applescript` | 0 | 0 |
 | `edge_cases/insertion_points.applescript` | 0 | 0 |
 | `edge_cases/whose_and_every.applescript` | 0 | 0 |
+| `folder_actions/attach_folder_action.applescript` | 0 | 0 |
 | `folder_actions/close_subfolders.applescript` | 0 | 0 |
 | `folder_actions/convert_ps_pdf.applescript` | 0 | 0 |
 | `folder_actions/image_add_icon.applescript` | 0 | 0 |
@@ -43,14 +44,13 @@
 
 ## Quarantined files
 
-Two files remain in `known-limits/` because they exhibit parser
-limitations that require external-scanner work beyond what landed this
-session. See [`known-limits/README.md`](known-limits/README.md) for the
-specific cause per file.
+One file remains in `known-limits/` because it exhibits parser
+limitations beyond what the inline_marker + token-bounding work landed.
+See [`known-limits/README.md`](known-limits/README.md) for the specific
+cause.
 
 | File | ERROR | MISSING |
 | --- | ---: | ---: |
-| `known-limits/attach_folder_action.applescript` | 3 | 0 |
 | `known-limits/remove_folder_actions.applescript` | 3 | 0 |
 
 ## How we got here
@@ -66,4 +66,5 @@ specific cause per file.
 | Quarantine 4 files into `known-limits/` | 0 (in active corpus) | — |
 | After commit `98fc987` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
 | Task 3.2 (bound multi-word tokens to a single line, un-quarantined `comment_tags.applescript`) | 0 (active corpus, 34/34) | — |
+| `inline_marker` external token (forces if-with-tail to a single logical line, widens tail to any `_item`, un-quarantines `attach_folder_action.applescript`) | 0 (active corpus, 35/35) | — |
 

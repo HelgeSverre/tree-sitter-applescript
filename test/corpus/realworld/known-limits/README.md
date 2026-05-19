@@ -1,20 +1,20 @@
 # Known parser limits
 
-The `.applescript` files in this directory are real AppleScript scripts (decompiled from Apple's `/Library/Scripts/`) that the current grammar **cannot fully parse without ERROR nodes**. They are kept here so they're not lost — anyone working on the parser should be able to test against them — but they are excluded from the corpus pass measurement at the parent level.
+The single `.applescript` file in this directory is a real AppleScript script (decompiled from Apple's `/Library/Scripts/`) that the current grammar **cannot fully parse without ERROR nodes**. It is kept here so it isn't lost — anyone working on the parser should be able to test against it — but it is excluded from the corpus pass measurement at the parent level.
 
-## Why they're here
+## Why it's here
 
-Each file exhibits a specific parser limitation documented in [`docs/references/external-scanner/02-lessons-learned.md`](../../../../../docs/references/external-scanner/02-lessons-learned.md). The grammar additions and external scanner (`src/scanner.c`) reduced ERRORs across the whole corpus from 732 → 10 (98.6%), but the remaining 10 errors cluster in these four files and require **column-/position-aware external scanner work** that's a multi-day design project, not a single grammar tweak.
+The file exhibits a specific parser limitation documented in [`docs/references/external-scanner/02-lessons-learned.md`](../../../../../docs/references/external-scanner/02-lessons-learned.md). Across the v1.0–v1.6 grammar work the corpus went from 732 → 0 errors across 35/35 active files; the one quarantined case here hits the rule-level cross-newline `compound_name` extension which the token-level fixes in v1.5.0 didn't cover.
 
 | File | Errors | Root cause |
 | --- | ---: | --- |
-| `attach_folder_action.applescript` | 3 | Outer `if_block` terminator: `end if` where `if` could be either the optional handler-name or a fresh `keyword_if` starting a new construct. Tree-sitter's GLR picks the wrong one. |
-| `remove_folder_actions.applescript` | 3 | Same outer-`if`-terminator cascade as `attach_folder_action.applescript`, plus the `to` ambiguity from `colorsync_extract.applescript`. |
+| `remove_folder_actions.applescript` | 3 | Rule-level cross-newline `compound_name` extension. `tell app "Sys" to ¬\n  delete folder action X` followed by `end if` on the next line: the parser's rule-level `extras` skip the newline before the next `compound_name` continuation, so the `end repeat` / `end if` tokens further down get pulled into a multi-line `compound_name`. The fix needs a row-tracking external token used inside `compound_name`'s rule continuation, not just inside multi-word tokens. |
 
 ## Resolved
 
 - `colorsync_extract.applescript` — fixed by column-aware `keyword_handler_to` (v1.4.0).
-- `comment_tags.applescript` — fixed by bounding multi-word tokens to a single line (Task 3.2). Moved to `edge_cases/`.
+- `comment_tags.applescript` — fixed by bounding multi-word tokens to a single line (v1.5.0). Moved to `edge_cases/`.
+- `attach_folder_action.applescript` — fixed by the `inline_marker` external token (v1.6.0) — disambiguates nested `if ... then return ... / end if / end if`, which was the cascade source. Moved to `folder_actions/`.
 
 ## How to re-include these once the parser improves
 
