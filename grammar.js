@@ -136,16 +136,17 @@ module.exports = grammar({
           //   • a list pattern: `on run {}`, `on open {a, b}` for droplets
           // The terminator can be the bare `end` keyword, optionally followed
           // by the handler name; or the single-token `end run` form for the
-          // run handler specifically.
+          // run handler specifically. The handler name may be either a plain
+          // identifier or a command-name token (`on open …`, `on quit …`).
           seq(
             field("keyword", $.keyword_function),
-            field("name", choice($.identifier, $.folder_action_event)),
+            field("name", choice($.identifier, $.folder_action_event, $.command_name)),
             optional(choice($.parameter_list, $.identifier, $.list)),
             repeat($.folder_action_param),
             optional($.given_clause),
             repeat($._item),
             choice(
-              seq($.keyword_end, optional(choice($.identifier, $.folder_action_event))),
+              seq($.keyword_end, optional(choice($.identifier, $.folder_action_event, $.command_name))),
               $.implicit_run_end
             )
           ),
@@ -695,12 +696,26 @@ module.exports = grammar({
           ci("save"),
           ci("delete"),
           ci("duplicate"),
-          ci("exists"),
           ci("make"),
           ci("move"),
           ci("count"),
           ci("get"),
-          ci("print")
+          ci("print"),
+          // Image Events / Finder commands
+          ci("rotate"),
+          ci("scale"),
+          ci("crop"),
+          ci("flip"),
+          ci("pad"),
+          ci("embed"),
+          ci("unembed"),
+          ci("convert"),
+          ci("download"),
+          ci("upload"),
+          ci("send"),
+          ci("receive"),
+          ci("eject"),
+          ci("mount")
         )
       ),
 
@@ -729,6 +744,12 @@ module.exports = grammar({
           seq(ci("default"), /\s+/, ci("location")),
           seq(ci("default"), /\s+/, ci("items")),
           seq(ci("giving"), /\s+/, ci("up"), /\s+/, ci("after")),
+          // Image Events parameter names: `rotate X to angle N`,
+          // `scale X by factor N`, `pad X with pad color C`, etc.
+          seq(ci("to"), /\s+/, ci("angle")),
+          seq(ci("by"), /\s+/, ci("factor")),
+          seq(ci("to"), /\s+/, ci("size")),
+          seq(ci("with"), /\s+/, ci("pad"), /\s+/, ci("color")),
           ci("buttons"),
           ci("using"),
           ci("at"),
@@ -921,7 +942,9 @@ module.exports = grammar({
 
     record: ($) => seq("{", $.record_entry, repeat(seq(",", $.record_entry)), "}"),
 
-    record_entry: ($) => seq($.identifier, ":", $._expression),
+    // Record entry. Key may be multi-word (`file name: x`, `disclosure
+    // triangle: y`) since AppleScript app dictionaries use such keys freely.
+    record_entry: ($) => seq($.compound_name, ":", $._expression),
 
     reference: ($) =>
       seq(
@@ -1056,27 +1079,28 @@ module.exports = grammar({
 
     // Property reference: `name of theFile`, also multi-word app-dictionary
     // properties like `current view of window`, `name extension of theFile`,
-    // `folder actions enabled`. The leading words come from application
-    // dictionaries that tree-sitter cannot inspect statically, so we accept
-    // 1–3 consecutive identifiers as the property name.
+    // `folder actions enabled`. Both sides allow multi-word names so list
+    // items like `millions of colors plus` parse as a single reference.
     property_reference: ($) =>
       prec.left(
         3,
         seq(
           $.compound_name,
           token(ci("of")),
-          $._expression
+          choice($._expression, $.compound_name)
         )
       ),
 
-    // A 1–4-word name. Each word may be an `identifier` or an `element_type`
-    // — common dictionary names like `Folder Action scripts folder` mix
-    // both. Higher precedence than the bare-identifier path so when `of`
-    // follows, the multi-word interpretation wins via the explicit
-    // conflict declaration.
+    // A 1–6-word name. Each word may be an `identifier` or an `element_type`
+    // — common dictionary names like `Folder Action scripts folder` and
+    // long enum values like `two hundred fifty six colors` need this. Higher
+    // precedence than the bare-identifier path so when `of` follows, the
+    // multi-word interpretation wins via the explicit conflict declaration.
     compound_name: ($) =>
       prec.right(seq(
         choice($.identifier, $.element_type),
+        optional(choice($.identifier, $.element_type)),
+        optional(choice($.identifier, $.element_type)),
         optional(choice($.identifier, $.element_type)),
         optional(choice($.identifier, $.element_type)),
         optional(choice($.identifier, $.element_type))
@@ -1098,23 +1122,24 @@ module.exports = grammar({
     element_type: ($) =>
       token(
         choice(
-          // Common single-word element types
-          ci("item"),
-          ci("word"),
-          ci("character"),
-          ci("paragraph"),
-          ci("line"),
-          ci("window"),
-          ci("document"),
-          ci("file"),
-          ci("folder"),
-          ci("disk"),
-          ci("process"),
-          ci("button"),
-          ci("menu"),
-          ci("row"),
-          ci("column"),
-          ci("cell"),
+          // Common single-word element types and their plurals (AppleScript
+          // accepts both forms with the same meaning in range expressions).
+          ci("item"), ci("items"),
+          ci("word"), ci("words"),
+          ci("character"), ci("characters"),
+          ci("paragraph"), ci("paragraphs"),
+          ci("line"), ci("lines"),
+          ci("window"), ci("windows"),
+          ci("document"), ci("documents"),
+          ci("file"), ci("files"),
+          ci("folder"), ci("folders"),
+          ci("disk"), ci("disks"),
+          ci("process"), ci("processes"),
+          ci("button"), ci("buttons"),
+          ci("menu"), ci("menus"),
+          ci("row"), ci("rows"),
+          ci("column"), ci("columns"),
+          ci("cell"), ci("cells"),
           // Common multi-word element types from Finder, System Events,
           // and Image Events dictionaries that real scripts use freely.
           seq(ci("text"), /\s+/, ci("item")),
@@ -1152,7 +1177,7 @@ module.exports = grammar({
         )
       ),
 
-    // Range expression: items 1 thru 5
+    // Range expression: `items 1 thru 5`, `characters 3 through 10 of X`.
     range_expression: ($) =>
       prec.left(
         3,
@@ -1160,7 +1185,8 @@ module.exports = grammar({
           $.element_type,
           $._expression,
           $.range_operator,
-          $._expression
+          $._expression,
+          optional(seq(token(ci("of")), $._expression))
         )
       ),
 
@@ -1224,21 +1250,26 @@ module.exports = grammar({
 
     // ==================== LITERALS ====================
 
-    // String with escape sequences
+    // String with escape sequences. The whole literal is a single `token`
+    // so `extras` (whitespace, comments, line-continuation `¬`) cannot be
+    // inserted between the opening quote and characters inside. Without this,
+    // a string like `"--XXXX"` would have `--XXXX` consumed as a comment.
     string: ($) =>
-      seq(
-        '"',
-        repeat(
-          choice(
-            $.escape_sequence,
-            /[^"\\]+/
-          )
-        ),
-        '"'
+      token(
+        seq(
+          '"',
+          repeat(choice(
+            seq("\\", /./),
+            /[^"\\]/
+          )),
+          '"'
+        )
       ),
 
+    // Retained for `(escape_sequence) @string.escape` highlight queries even
+    // though `string` is now a single opaque token in the AST.
     escape_sequence: ($) =>
-      token.immediate(
+      token(
         choice(
           "\\\\",
           '\\"',

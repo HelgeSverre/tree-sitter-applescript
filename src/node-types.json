@@ -2748,6 +2748,10 @@
         "required": false,
         "types": [
           {
+            "type": "command_name",
+            "named": true
+          },
+          {
             "type": "folder_action_event",
             "named": true
           },
@@ -2780,6 +2784,10 @@
         },
         {
           "type": "command_call",
+          "named": true
+        },
+        {
+          "type": "command_name",
           "named": true
         },
         {
@@ -6058,6 +6066,10 @@
           "named": true
         },
         {
+          "type": "compound_name",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },
@@ -7534,21 +7546,6 @@
         },
         {
           "type": "using_terms_block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "string",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "escape_sequence",
           "named": true
         }
       ]
@@ -9326,10 +9323,6 @@
     }
   },
   {
-    "type": "\"",
-    "named": false
-  },
-  {
     "type": "&",
     "named": false
   },
@@ -9383,10 +9376,6 @@
   },
   {
     "type": "element_type",
-    "named": true
-  },
-  {
-    "type": "escape_sequence",
     "named": true
   },
   {
@@ -9519,6 +9508,10 @@
   },
   {
     "type": "specifier_prefix",
+    "named": true
+  },
+  {
+    "type": "string",
     "named": true
   },
   {

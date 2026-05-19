@@ -18,11 +18,7 @@ String with escape sequences
 --------------------------------------------------------------------------------
 
 (source_file
-  (string
-    (escape_sequence)
-    (escape_sequence)
-    (escape_sequence)
-    (escape_sequence)))
+  (string))
 
 ================================================================================
 Number integer
@@ -115,8 +111,10 @@ Record
 (source_file
   (record
     (record_entry
-      (identifier)
+      (compound_name
+        (identifier))
       (string))
     (record_entry
-      (identifier)
+      (compound_name
+        (identifier))
       (number))))
