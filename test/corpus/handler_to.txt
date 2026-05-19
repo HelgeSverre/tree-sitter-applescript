@@ -1,0 +1,48 @@
+================================================================================
+move X to trash inside tell block
+================================================================================
+
+tell application "Finder"
+    move x to trash
+end tell
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (tell_block
+    (keyword_tell)
+    target: (reference
+      (keyword_application)
+      (string))
+    (command_call
+      command: (command_name)
+      argument: (identifier)
+      (command_parameter
+        name: (parameter_name)
+        value: (identifier)))
+    (keyword_end)
+    (keyword_tell)))
+
+================================================================================
+Handler definition with to at column 0
+================================================================================
+
+to splitString(s, delim)
+    return s
+end splitString
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function
+      (keyword_handler_to))
+    name: (identifier)
+    (parameter_list
+      (identifier)
+      (identifier))
+    (return_statement
+      (keyword_return)
+      (identifier))
+    (keyword_end)
+    (identifier)))
