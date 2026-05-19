@@ -197,10 +197,13 @@ static bool scan_piped_identifier(TSLexer *lexer) {
 // and the rest of the grammar still parses the header correctly because
 // `to` is allowed in non-handler positions too.
 static bool scan_keyword_handler_to(TSLexer *lexer) {
-    // Must be at column 0. tree-sitter's extras already consumed
-    // leading whitespace before we get here, so get_column reports the
-    // column of the FIRST non-whitespace character on the line — which
-    // for a handler opener is `t`.
+    // `get_column` returns the current byte offset from the most recent
+    // newline, including any whitespace the dispatcher's `skip()` calls
+    // already advanced past. A top-level `to` has no leading whitespace,
+    // so column == 0 and we accept it. An indented `to` (column > 0,
+    // whether the indent is spaces, tabs, or a `¬` continuation) is
+    // rejected here and falls through to the regular `keyword_to` from
+    // the in-grammar lexer.
     if (lexer->get_column(lexer) != 0) return false;
 
     // Match the word `to` case-insensitively.
