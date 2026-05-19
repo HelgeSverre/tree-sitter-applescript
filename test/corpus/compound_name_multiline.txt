@@ -32,18 +32,24 @@ display dialog "Name?" ¬
       value: (string))))
 
 ================================================================================
-display dialog without continuation — parser still attaches the indented parameter
+command_flag_name split across newlines — no longer glued after token-level fix
 ================================================================================
 
-display dialog "Name?"
-    default answer ""
+choose file with multiple
+    selections allowed
 
 --------------------------------------------------------------------------------
 
+; Before the fix (\s+ inside token), the lexer stitched the two physical lines
+; into a single command_flag_name token ("with multiple\n    selections allowed").
+; After the fix ([ \t]+ inside token), the newline breaks the token; the grammar
+; falls back to command_parameter(parameter_name("with"), compound_name(...)).
 (source_file
   (command_call
     command: (command_name)
-    argument: (string)
     (command_parameter
       name: (parameter_name)
-      value: (string))))
+      value: (compound_name
+        (identifier)
+        (identifier)
+        (identifier)))))

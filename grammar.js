@@ -861,6 +861,18 @@ module.exports = grammar({
         )
       ),
 
+    // NOTE: `command_parameter` can attach across a newline (e.g.
+    //     display dialog "X"
+    //         default answer ""
+    // the indented second line binds back to the first as a parameter).
+    // The TOKEN-level multi-word gluing was fixed in v1.5.0 (`\s+` →
+    // `[ \t]+` inside multi-word `token(...)` rules), but the RULE-level
+    // `repeat($.command_parameter)` still skips over newlines via `extras`.
+    // Whether this is a bug or a feature depends on context — Apple's own
+    // formatter often wraps long command calls this way without a `¬`.
+    // Documented here so a future maintainer doesn't spend an hour
+    // rediscovering it.
+    //
     // Named parameters for commands: with title "X", buttons {"OK"}, etc.
     // The value may be an expression, a multi-word `compound_name`, or a
     // bare `command_call` such as `default location path to desktop folder`.
