@@ -1,14 +1,17 @@
 # Known parser limits
 
-The single `.applescript` file in this directory is a real AppleScript script (decompiled from Apple's `/Library/Scripts/`) that the current grammar **cannot fully parse without ERROR nodes**. It is kept here so it isn't lost — anyone working on the parser should be able to test against it — but it is excluded from the corpus pass measurement at the parent level.
+**This directory is currently empty of `.applescript` files.** All four files originally quarantined this session (`colorsync_extract`, `comment_tags`, `attach_folder_action`, `remove_folder_actions`) are now in the active corpus.
 
-## Why it's here
+The folder is kept as a documented place for future grammar regressions to land.
 
-The file exhibits a specific parser limitation documented in [`docs/references/external-scanner/02-lessons-learned.md`](../../../../../docs/references/external-scanner/02-lessons-learned.md). Across the v1.0–v1.6 grammar work the corpus went from 732 → 0 errors across 35/35 active files; the one quarantined case here hits the rule-level cross-newline `compound_name` extension which the token-level fixes in v1.5.0 didn't cover.
+## History
 
-| File | Errors | Root cause |
-| --- | ---: | --- |
-| `remove_folder_actions.applescript` | 3 | Rule-level cross-newline `compound_name` extension. `tell app "Sys" to ¬\n  delete folder action X` followed by `end if` on the next line: the parser's rule-level `extras` skip the newline before the next `compound_name` continuation, so the `end repeat` / `end if` tokens further down get pulled into a multi-line `compound_name`. The fix needs a row-tracking external token used inside `compound_name`'s rule continuation, not just inside multi-word tokens. |
+| File | Resolved in | Root cause + fix |
+| --- | --- | --- |
+| `colorsync_extract.applescript` | v1.4.0 | `move X to trash` inside `tell` was mis-parsed as a handler header (`to` ambiguity). Fix: column-aware `keyword_handler_to` external token. |
+| `comment_tags.applescript` | v1.5.0 | Post-block-comment cascade rooted in multi-word `token()`s greedily matching across newlines. Fix: replaced 133 `/\s+/` with `/[ \t]+/` inside multi-word tokens. |
+| `attach_folder_action.applescript` | v1.6.0 | Nested `if … then return … / end if / end if` parsed as `if_simple_statement` instead of `if_block`. Fix: `inline_marker` external token requires same-logical-line tail; widened tail to non-block single-statement shapes. |
+| `remove_folder_actions.applescript` | v1.7.0 | `tell ... to delete script X of folder action Y` failed because `script` was tokenised as `keyword_script` (script-block keyword) and couldn't appear as an element type. Fix: `index_expression` now accepts `keyword_script` as an alternative to `element_type`. |
 
 ## Resolved
 

@@ -1,6 +1,6 @@
 # Real-world corpus — current state
 
-**35 of 35 active files parse with zero ERROR and zero MISSING nodes.**
+**36 of 36 active files parse with zero ERROR and zero MISSING nodes — `known-limits/` is now empty.**
 
 ## Per-file ERROR counts
 
@@ -22,6 +22,7 @@
 | `folder_actions/image_rotate_right.applescript` | 0 | 0 |
 | `folder_actions/new_item_alert.applescript` | 0 | 0 |
 | `folder_actions/open_show_comments.applescript` | 0 | 0 |
+| `folder_actions/remove_folder_actions.applescript` | 0 | 0 |
 | `handlers/disable_folder_actions.applescript` | 0 | 0 |
 | `handlers/enable_folder_actions.applescript` | 0 | 0 |
 | `idioms/voiceover_screenshot.applescript` | 0 | 0 |
@@ -44,14 +45,9 @@
 
 ## Quarantined files
 
-One file remains in `known-limits/` because it exhibits parser
-limitations beyond what the inline_marker + token-bounding work landed.
-See [`known-limits/README.md`](known-limits/README.md) for the specific
-cause.
-
-| File | ERROR | MISSING |
-| --- | ---: | ---: |
-| `known-limits/remove_folder_actions.applescript` | 3 | 0 |
+None. All four files originally quarantined this session are now in the
+active corpus. The `known-limits/` directory remains for documentation
+and as a place to land any future regressions.
 
 ## How we got here
 
@@ -67,4 +63,5 @@ cause.
 | After commit `98fc987` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
 | Task 3.2 (bound multi-word tokens to a single line, un-quarantined `comment_tags.applescript`) | 0 (active corpus, 34/34) | — |
 | `inline_marker` external token (forces if-with-tail to a single logical line, widens tail to any `_item`, un-quarantines `attach_folder_action.applescript`) | 0 (active corpus, 35/35) | — |
+| Widened `if_simple_statement` tail to {atomic} ∪ {set,copy,command_call,tell_simple_statement}; allowed `keyword_script` in `index_expression`; un-quarantined `remove_folder_actions.applescript` | 0 (active corpus, **36/36**) | known-limits empty |
 

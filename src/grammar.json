@@ -1206,8 +1206,45 @@
             "type": "FIELD",
             "name": "then_action",
             "content": {
-              "type": "SYMBOL",
-              "name": "_item"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "return_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "exit_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "continue_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "error_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "log_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "set_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "copy_statement"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "command_call"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "tell_simple_statement"
+                }
+              ]
             }
           }
         ]
@@ -6529,8 +6566,17 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "element_type"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "element_type"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "keyword_script"
+              }
+            ]
           },
           {
             "type": "SYMBOL",

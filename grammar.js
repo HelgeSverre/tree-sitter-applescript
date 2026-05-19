@@ -375,11 +375,15 @@ module.exports = grammar({
     // regular `keyword_then` (no inline_marker requirement) is used by
     // `if_block` and `else_if_clause`.
     //
-    // Because the same-line constraint guarantees no multi-line if-block
-    // body can be mistaken for a one-liner tail, we can safely accept
-    // any `_item` as the tail — including `tell_simple_statement`,
-    // `command_call`, `set_statement`, etc. This makes idioms like
-    // `if cond then ¬\n  tell app to do X` parse correctly.
+    // The tail is restricted to a SET of explicit single-statement
+    // shapes. Originally only the 5 atomic ones (return/exit/continue/
+    // error/log) were allowed; the same-line constraint from
+    // `inline_marker` lets us also accept set/copy/command_call/
+    // tell_simple_statement without re-introducing the "multi-line body
+    // greedy match" regression that bit the prior session. We do NOT
+    // widen this to all of `_item` because `_item` includes `tell_block`
+    // and other multi-line-body shapes that GLR can prefer over the
+    // single-statement alternative.
     if_simple_statement: ($) =>
       prec.right(
         1,
@@ -388,7 +392,17 @@ module.exports = grammar({
           field("condition", $._expression),
           $.keyword_then,
           $.inline_marker,
-          field("then_action", $._item)
+          field("then_action", choice(
+            $.return_statement,
+            $.exit_statement,
+            $.continue_statement,
+            $.error_statement,
+            $.log_statement,
+            $.set_statement,
+            $.copy_statement,
+            $.command_call,
+            $.tell_simple_statement
+          ))
         )
       ),
 
@@ -1404,14 +1418,17 @@ module.exports = grammar({
         optional(choice($._name_ref, $.element_type))
       )),
 
-    // Index expression: `item 1`, `window 2`, `paragraph 3 of foo`.
-    // The optional `of <expr>` tail makes `item 1 of FS` parse as a single
-    // object reference rather than splitting after `item 1`.
+    // Index expression: `item 1`, `window 2`, `paragraph 3 of foo`,
+    // `script ScriptName of folder action FolderName`. The leading
+    // element accepts `keyword_script` as an alternative so command
+    // arguments like `delete script X` parse — the lexer always emits
+    // `keyword_script` for the bare word `script`, so element_type
+    // never sees it.
     index_expression: ($) =>
       prec.left(
         4,
         seq(
-          $.element_type,
+          choice($.element_type, $.keyword_script),
           $._expression,
           optional(seq(token(ci("of")), $._expression))
         )
