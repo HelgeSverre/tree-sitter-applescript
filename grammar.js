@@ -274,26 +274,33 @@ module.exports = grammar({
     // ==================== IF BLOCK ====================
 
     // If block: if condition then ... [else if ... then ...] [else ...] end [if]
-    // Higher precedence than `if_simple_statement` so a multi-line if with an
-    // `end if` doesn't get sliced into `if_simple_statement` + orphaned `end`.
+    // Uses `prec.dynamic` so that when both `if_block` and `if_simple_statement`
+    // can match the same prefix, the parser actively prefers the multi-line
+    // form whenever it sees a matching `end if` ahead.
     if_block: ($) =>
-      prec.right(
-        3,
-        seq(
-          field("keyword", $.keyword_if),
-          field("condition", $._expression),
-          $.keyword_then,
-          repeat($._item),
-          repeat($.else_if_clause),
-          optional($.else_clause),
-          $.keyword_end,
-          optional(token(ci("if")))
+      prec.dynamic(
+        2,
+        prec.right(
+          3,
+          seq(
+            field("keyword", $.keyword_if),
+            field("condition", $._expression),
+            $.keyword_then,
+            repeat($._item),
+            repeat($.else_if_clause),
+            optional($.else_clause),
+            $.keyword_end,
+            optional(token(ci("if")))
+          )
         )
       ),
 
-    // One-line if: `if x then return y`. Lower precedence than `if_block` so
-    // a multi-line `if/then/.../end if` doesn't get sliced into a simple if
-    // plus an orphaned `end if`.
+    // One-line if: `if x then return y`. Allows a small set of items as the
+    // single tail action — deliberately restricted so a multi-line if-block
+    // body (which often starts with `set_statement` / `command_call`) doesn't
+    // accidentally match here and orphan the `end if`. The trade-off is that
+    // a true one-liner like `if x then set y to 5` parses as an `if_block`
+    // with a missing `end if`, which is suboptimal but uncommon in practice.
     if_simple_statement: ($) =>
       prec.right(
         1,
@@ -301,7 +308,13 @@ module.exports = grammar({
           field("keyword", $.keyword_if),
           field("condition", $._expression),
           $.keyword_then,
-          field("then_action", $._item)
+          field("then_action", choice(
+            $.return_statement,
+            $.exit_statement,
+            $.continue_statement,
+            $.error_statement,
+            $.log_statement
+          ))
         )
       ),
 
@@ -523,13 +536,14 @@ module.exports = grammar({
 
     // Set statement
     // `set <target> to <value>`. Target can be a multi-word property name
-    // (`folder actions enabled`, `current view`).
+    // (`folder actions enabled`, `current view`). Value may be either an
+    // expression or a command call (`set MyPath to path to me`).
     set_statement: ($) =>
       seq(
         $.keyword_set,
         field("variable", choice($._expression, $.compound_name)),
         token(ci("to")),
-        field("value", $._expression)
+        field("value", choice($._expression, $.command_call))
       ),
 
     keyword_set: ($) => token(ci("set")),
@@ -598,12 +612,14 @@ module.exports = grammar({
 
     // ==================== COMMAND CALLS ====================
 
-    // Common AppleScript commands
+    // Common AppleScript commands. Argument can be either an expression or
+    // a multi-word `compound_name` so `path to home folder` and similar
+    // app-dictionary references parse without spilling tokens.
     command_call: ($) =>
       prec.right(
         seq(
           field("command", $.command_name),
-          optional(field("argument", $._expression)),
+          optional(field("argument", choice($._expression, $.compound_name))),
           repeat($.command_parameter)
         )
       ),
@@ -824,7 +840,8 @@ module.exports = grammar({
 
     // ObjC bridge method call: `receiver's selector:arg [label:arg ...]`.
     // Slightly higher precedence than plain possessive so the `:arg` tail wins
-    // when present.
+    // when present. The bare receiverless form (`sortList:myList`) isn't
+    // modeled here because it collides with record-entry syntax inside `{}`.
     objc_selector_call: ($) =>
       prec.left(
         8,
