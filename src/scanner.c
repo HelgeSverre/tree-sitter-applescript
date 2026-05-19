@@ -15,9 +15,15 @@
 //
 // This scanner emits two external tokens that the grammar wires up:
 //
-//   - `block_comment`   — `(* ... *)`, quote-aware, optionally nested.
-//   - `alias_prefix`    — the bare word `alias` only when the next non-space
-//                         input is NOT `of`.
+//   - block_comment   — `(* ... *)`, quote-aware, optionally nested.
+//   - alias_prefix    — the bare word `alias` only when the next non-space
+//                       input is NOT `of`.
+//
+// A third token (`compound_word`, an identifier that is NOT a reserved
+// keyword) was prototyped to stop multi-word compound_names from crossing
+// newlines, but it broke too many legitimate parses where keyword-like
+// words (e.g. `down`, `option`, `up`) are valid property names in app
+// dictionaries. See git history if that approach gets revisited.
 
 #include "tree_sitter/parser.h"
 #include <wctype.h>
@@ -155,18 +161,26 @@ static bool scan_alias_prefix(TSLexer *lexer) {
 
 bool tree_sitter_applescript_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
     (void)payload;
-    // Skip leading whitespace (including newlines and the line-continuation
-    // glyph). If we don't, the internal lexer races us to the first
-    // significant character — it will consume `(` as a literal `(` token
-    // before our `scan_block_comment` ever gets to see it.
-    while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
-           lexer->lookahead == '\n' || lexer->lookahead == '\r' ||
-           lexer->lookahead == 0x00AC) {
-        skip(lexer);
-    }
 
-    if (valid_symbols[BLOCK_COMMENT] && lexer->lookahead == '(') {
-        return scan_block_comment(lexer);
+    // For block_comment we MUST skip newlines — otherwise the internal lexer
+    // races us to the first significant character and consumes `(` as a
+    // literal `(` token before we ever see it. For alias_prefix and
+    // compound_word we deliberately do NOT skip newlines, so a multi-word
+    // compound_name can't reach across a newline into the next statement.
+    if (valid_symbols[BLOCK_COMMENT]) {
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
+               lexer->lookahead == '\n' || lexer->lookahead == '\r' ||
+               lexer->lookahead == 0x00AC) {
+            skip(lexer);
+        }
+        if (lexer->lookahead == '(') {
+            return scan_block_comment(lexer);
+        }
+    } else {
+        // Skip spaces and tabs only — newlines stop a compound_name.
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+            skip(lexer);
+        }
     }
 
     if (valid_symbols[ALIAS_PREFIX] &&
