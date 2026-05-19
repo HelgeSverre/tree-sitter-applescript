@@ -548,17 +548,37 @@ module.exports = grammar({
 
     // ==================== USE STATEMENTS ====================
 
-    // Use statement: use framework "X" / use scripting additions / use application "X"
+    // Use statement — covers every form documented in the AppleScript
+    // Language Guide and macosxautomation.com:
+    //   `use AppleScript version "2.4"`
+    //   `use scripting additions`
+    //   `use framework "Foundation"`
+    //   `use application "Finder"`
+    //   `use script "MyLibrary"`
+    //   `use Safari: application "Safari" version "7.0" without importing`
+    // The optional `<alias>:` prefix binds the imported resource to a name;
+    // the optional `version "X"` requests a minimum version; the optional
+    // `with importing` / `without importing` controls terminology import.
     use_statement: ($) =>
       seq(
         $.keyword_use,
+        optional(seq(field("alias", $.identifier), ":")),
         choice(
-          seq(token(ci("AppleScript")), optional(seq(token(ci("version")), $.string))),
-          seq(token(ci("framework")), $.string),
+          seq(token(ci("AppleScript")), optional($.use_version_clause)),
+          seq(token(ci("framework")), $.string, optional($.use_version_clause), optional($.use_importing_clause)),
           seq(token(ci("scripting")), token(ci("additions"))),
-          seq(token(ci("application")), $.string)
+          seq(token(ci("application")), $.string, optional($.use_version_clause), optional($.use_importing_clause)),
+          seq(token(ci("script")), $.string, optional($.use_version_clause), optional($.use_importing_clause))
         )
       ),
+
+    use_version_clause: ($) => seq(token(ci("version")), $.string),
+
+    use_importing_clause: ($) =>
+      token(choice(
+        seq(ci("with"), /\s+/, ci("importing")),
+        seq(ci("without"), /\s+/, ci("importing"))
+      )),
 
     keyword_use: ($) => token(ci("use")),
 
@@ -573,7 +593,9 @@ module.exports = grammar({
         field("value", $._expression)
       ),
 
-    keyword_property: ($) => token(ci("property")),
+    // Accepts the full word `property` or the short form `prop`, both of
+    // which the AppleScript compiler treats as identical.
+    keyword_property: ($) => token(choice(ci("property"), ci("prop"))),
 
     // Global declaration
     global_declaration: ($) =>
@@ -853,6 +875,7 @@ module.exports = grammar({
           $.current_date,
           $.me_reference,
           $.it_reference,
+          $.its_reference,
           $.result_reference,
           $.list,
           $.record,
@@ -873,7 +896,33 @@ module.exports = grammar({
           $.my_expression,
           $.handler_call,
           $.applescript_constant,
+          $.relative_reference,
           $.identifier
+        )
+      ),
+
+    // Relative reference forms from the AppleScript Language Guide:
+    //   `<insertion-point> <base>`
+    //   `before <ref>`, `after <ref>`, `behind <ref>`,
+    //   `in front of <ref>`, `in back of <ref>`
+    // Example: `move word 1 to before paragraph 3`, `paragraph after word 99`.
+    // Note: `beginning` and `end` are insertion-point specifier prefixes
+    // (handled by `specifier_prefix`); the words below stand alone before a
+    // base expression.
+    relative_reference: ($) =>
+      prec.right(seq(
+        $.relative_position,
+        $._expression
+      )),
+
+    relative_position: ($) =>
+      token(
+        choice(
+          seq(ci("in"), /\s+/, ci("front"), /\s+/, ci("of")),
+          seq(ci("in"), /\s+/, ci("back"), /\s+/, ci("of")),
+          ci("before"),
+          ci("after"),
+          ci("behind")
         )
       ),
 
@@ -1050,9 +1099,14 @@ module.exports = grammar({
         prec.left(1, seq($._expression, token(ci("exists"))))
       ),
 
+    // Comparison operators with all the synonyms documented in the AppleScript
+    // Language Guide (Operators Reference). AppleScript provides multiple
+    // English-like spellings for each comparison; we accept them all so real
+    // scripts highlight consistently.
     comparison_operator: ($) =>
       token(
         choice(
+          // Symbol forms
           "=",
           "≠",
           "/=",
@@ -1062,27 +1116,81 @@ module.exports = grammar({
           "<=",
           "≥",
           ">=",
+          // Equality
           ci("is equal to"),
-          ci("is not equal to"),
+          ci("is equal"),
+          ci("equal to"),
           ci("equals"),
+          ci("equal"),
+          ci("is not equal to"),
+          ci("is not equal"),
+          ci("isn't equal to"),
+          ci("isn't equal"),
+          ci("does not equal"),
+          ci("doesn't equal"),
+          // Ordering (less than)
           ci("is less than"),
-          ci("is greater than"),
+          ci("less than"),
+          ci("is not greater than or equal to"),
+          ci("is not greater than or equal"),
+          ci("isn't greater than or equal to"),
+          ci("isn't greater than or equal"),
+          // Ordering (less than or equal)
           ci("is less than or equal to"),
+          ci("is less than or equal"),
+          ci("less than or equal to"),
+          ci("less than or equal"),
+          ci("is not greater than"),
+          ci("isn't greater than"),
+          // Ordering (greater than)
+          ci("is greater than"),
+          ci("greater than"),
+          ci("is not less than or equal to"),
+          ci("is not less than or equal"),
+          ci("isn't less than or equal to"),
+          ci("isn't less than or equal"),
+          // Ordering (greater than or equal)
           ci("is greater than or equal to"),
+          ci("is greater than or equal"),
+          ci("greater than or equal to"),
+          ci("greater than or equal"),
+          ci("is not less than"),
+          ci("isn't less than"),
+          // String ordering (text-only)
           ci("comes before"),
+          ci("does not come before"),
+          ci("doesn't come before"),
           ci("comes after"),
-          ci("is"),
+          ci("does not come after"),
+          ci("doesn't come after"),
+          // Generic `is` / `is not` — must come AFTER the `is equal/less/...`
+          // variants above so the longer form wins via longest-match lexing.
           ci("is not"),
+          ci("isn't"),
+          ci("is"),
+          // Containment
           ci("contains"),
           ci("does not contain"),
+          ci("doesn't contain"),
+          ci("is contained by"),
+          ci("is not contained by"),
+          ci("isn't contained by"),
+          ci("is in"),
+          ci("is not in"),
+          ci("isn't in"),
+          // Text matching
           ci("starts with"),
           ci("begins with"),
+          ci("start with"),
+          ci("begin with"),
           ci("ends with"),
+          ci("end with"),
           ci("does not start with"),
           ci("does not begin with"),
           ci("does not end with"),
-          ci("is in"),
-          ci("is not in")
+          ci("doesn't start with"),
+          ci("doesn't begin with"),
+          ci("doesn't end with")
         )
       ),
 
@@ -1304,6 +1412,7 @@ module.exports = grammar({
           seq(ci("styled"), /\s+/, ci("text")),
           ci("data"),
           ci("reference"),
+          ci("ref"),  // short form of `reference`
           ci("anything"),
           seq(ci("list"), /\s+/, ci("of"), /\s+/, ci("text")),
           seq(ci("list"), /\s+/, ci("of"), /\s+/, ci("integer")),
@@ -1321,6 +1430,11 @@ module.exports = grammar({
     me_reference: ($) => token(ci("me")),
 
     it_reference: ($) => token(ci("it")),
+
+    // `its` — possessive companion to `it`, used in property chains
+    // (`its name`, `its size of file`). Treated as a special reference for
+    // highlighting; distinct from `it` to preserve the semantic difference.
+    its_reference: ($) => token(ci("its")),
 
     result_reference: ($) => token(ci("result")),
 
@@ -1357,7 +1471,19 @@ module.exports = grammar({
         )
       ),
 
-    number: ($) => /-?\d+(\.\d+)?(E[+-]?\d+)?/,
+    // Numeric literal. Plain integer / real / exponential, OR an ordinal
+    // form (`1st`, `2nd`, `23rd`, `101st`, `11th`) used as a synonym for
+    // ordinal positional words (`first`, `second`, ...).
+    number: ($) =>
+      token(
+        choice(
+          // Ordinal suffix forms: any integer followed by st/nd/rd/th (case
+          // insensitive). Listed BEFORE the plain numeric pattern so the
+          // longer ordinal token wins via longest-match lexing.
+          /-?\d+(st|nd|rd|th|ST|ND|RD|TH)/,
+          /-?\d+(\.\d+)?(E[+-]?\d+)?/
+        )
+      ),
 
     boolean: ($) => token(choice(ci("true"), ci("false"))),
 

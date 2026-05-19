@@ -9,7 +9,8 @@ use AppleScript version "2.4"
 (source_file
   (use_statement
     (keyword_use)
-    (string)))
+    (use_version_clause
+      (string))))
 
 ================================================================================
 Use scripting additions

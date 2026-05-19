@@ -60,6 +60,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -125,6 +129,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -211,6 +219,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -284,6 +296,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -392,6 +408,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -457,6 +477,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -543,6 +567,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -608,6 +636,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -725,6 +757,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -790,6 +826,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -888,6 +928,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -953,6 +997,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -1094,6 +1142,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -1175,6 +1227,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -1316,6 +1372,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -1381,6 +1441,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -1454,6 +1518,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -1519,6 +1587,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -1671,6 +1743,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_else",
           "named": true
         },
@@ -1752,6 +1828,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -1874,6 +1954,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -1939,6 +2023,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -2061,6 +2149,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_else_if",
           "named": true
         },
@@ -2146,6 +2238,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -2320,6 +2416,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_on_error",
           "named": true
         },
@@ -2401,6 +2501,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -2538,6 +2642,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_error",
           "named": true
         },
@@ -2607,6 +2715,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -2753,6 +2865,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -2818,6 +2934,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -2993,6 +3113,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -3082,6 +3206,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -3204,6 +3332,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -3269,6 +3401,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -3409,6 +3545,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -3494,6 +3634,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -3616,6 +3760,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -3681,6 +3829,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -3869,6 +4021,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -3950,6 +4106,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -4085,6 +4245,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -4150,6 +4314,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -4332,6 +4500,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -4397,6 +4569,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -4494,6 +4670,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_log",
           "named": true
         },
@@ -4563,6 +4743,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -4641,6 +4825,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_my",
           "named": true
         },
@@ -4710,6 +4898,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -4866,6 +5058,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -4947,6 +5143,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -5069,6 +5269,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -5138,6 +5342,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -5220,6 +5428,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -5285,6 +5497,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -5386,6 +5602,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -5451,6 +5671,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -5533,6 +5757,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -5598,6 +5826,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -5680,6 +5912,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -5749,6 +5985,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -5837,6 +6077,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -5902,6 +6146,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -5995,6 +6243,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -6060,6 +6312,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -6142,6 +6398,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -6211,6 +6471,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -6308,6 +6572,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -6373,6 +6641,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -6470,6 +6742,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -6535,6 +6811,165 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "relative_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "applescript_constant",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "its_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_position",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -6672,6 +7107,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -6753,6 +7192,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -6880,6 +7323,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_return",
           "named": true
         },
@@ -6949,6 +7396,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -7096,6 +7547,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -7181,6 +7636,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -7307,6 +7766,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -7372,6 +7835,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -7449,6 +7916,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -7514,6 +7985,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -7655,6 +8130,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -7732,6 +8211,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -7864,6 +8347,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -7929,6 +8416,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -8051,6 +8542,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -8132,6 +8627,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -8258,6 +8757,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -8323,6 +8826,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -8499,6 +9006,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -8580,6 +9091,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -8712,6 +9227,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -8777,6 +9296,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -8899,6 +9422,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -8980,6 +9507,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -9165,6 +9696,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -9246,6 +9781,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -9368,6 +9907,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -9436,6 +9979,10 @@
           "named": true
         },
         {
+          "type": "relative_reference",
+          "named": true
+        },
+        {
           "type": "result_reference",
           "named": true
         },
@@ -9461,7 +10008,18 @@
   {
     "type": "use_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -9470,6 +10028,29 @@
           "type": "keyword_use",
           "named": true
         },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "use_importing_clause",
+          "named": true
+        },
+        {
+          "type": "use_version_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "use_version_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
           "type": "string",
           "named": true
@@ -9544,6 +10125,10 @@
             "named": true
           },
           {
+            "type": "its_reference",
+            "named": true
+          },
+          {
             "type": "list",
             "named": true
           },
@@ -9609,6 +10194,10 @@
           },
           {
             "type": "reference_to_expression",
+            "named": true
+          },
+          {
+            "type": "relative_reference",
             "named": true
           },
           {
@@ -9731,6 +10320,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "keyword_end",
           "named": true
         },
@@ -9812,6 +10405,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -9934,6 +10531,10 @@
           "named": true
         },
         {
+          "type": "its_reference",
+          "named": true
+        },
+        {
           "type": "list",
           "named": true
         },
@@ -9999,6 +10600,10 @@
         },
         {
           "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "relative_reference",
           "named": true
         },
         {
@@ -10090,6 +10695,10 @@
   },
   {
     "type": "it_reference",
+    "named": true
+  },
+  {
+    "type": "its_reference",
     "named": true
   },
   {
@@ -10213,6 +10822,10 @@
     "named": true
   },
   {
+    "type": "relative_position",
+    "named": true
+  },
+  {
     "type": "specifier_prefix",
     "named": true
   },
@@ -10234,6 +10847,10 @@
   },
   {
     "type": "unary_operator",
+    "named": true
+  },
+  {
+    "type": "use_importing_clause",
     "named": true
   },
   {
