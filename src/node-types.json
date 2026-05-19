@@ -44,6 +44,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -187,6 +191,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -323,6 +331,10 @@
           },
           {
             "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "handler_call",
             "named": true
           },
           {
@@ -492,6 +504,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -644,6 +660,10 @@
         },
         {
           "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -821,6 +841,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -838,10 +862,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -1051,6 +1071,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -1178,6 +1202,10 @@
           },
           {
             "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "handler_call",
             "named": true
           },
           {
@@ -1370,6 +1398,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -1387,10 +1419,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -1581,6 +1609,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -1740,6 +1772,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -1757,10 +1793,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -1987,6 +2019,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -2004,10 +2040,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -2213,6 +2245,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -2380,6 +2416,149 @@
     }
   },
   {
+    "type": "handler_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "command_call",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "handler_definition",
     "named": true,
     "fields": {
@@ -2478,6 +2657,10 @@
         },
         {
           "type": "global_declaration",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -2700,6 +2883,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -2877,6 +3064,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -2894,10 +3085,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -3092,6 +3279,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -3260,6 +3451,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "handler_definition",
             "named": true
           },
@@ -3277,10 +3472,6 @@
           },
           {
             "type": "ignoring_block",
-            "named": true
-          },
-          {
-            "type": "implicit_run_end",
             "named": true
           },
           {
@@ -3517,6 +3708,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -3534,10 +3729,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -3696,6 +3887,11 @@
     }
   },
   {
+    "type": "implicit_run_end",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "index_expression",
     "named": true,
     "fields": {},
@@ -3733,6 +3929,10 @@
         },
         {
           "type": "element_type",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -3975,6 +4175,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -4129,6 +4333,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -4265,6 +4473,10 @@
         },
         {
           "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -4461,6 +4673,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -4478,10 +4694,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -4672,6 +4884,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -4812,6 +5028,10 @@
         },
         {
           "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -4973,6 +5193,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -5112,6 +5336,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -5248,6 +5476,10 @@
         },
         {
           "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -5397,6 +5629,10 @@
           },
           {
             "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "handler_call",
             "named": true
           },
           {
@@ -5550,6 +5786,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -5686,6 +5926,10 @@
         },
         {
           "type": "element_type",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -5843,6 +6087,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -5994,6 +6242,10 @@
         },
         {
           "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -6171,6 +6423,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -6188,10 +6444,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -6387,6 +6639,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -6575,6 +6831,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -6592,10 +6852,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -6790,6 +7046,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -6921,6 +7181,10 @@
           },
           {
             "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "handler_call",
             "named": true
           },
           {
@@ -7095,6 +7359,10 @@
         },
         {
           "type": "global_declaration",
+          "named": true
+        },
+        {
+          "type": "handler_call",
           "named": true
         },
         {
@@ -7330,6 +7598,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -7489,6 +7761,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -7506,10 +7782,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -7701,6 +7973,10 @@
           },
           {
             "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "handler_call",
             "named": true
           },
           {
@@ -7917,6 +8193,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -7934,10 +8214,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -8171,6 +8447,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -8188,10 +8468,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -8382,6 +8658,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -8550,6 +8830,10 @@
             "named": true
           },
           {
+            "type": "handler_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -8709,6 +8993,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "handler_definition",
           "named": true
         },
@@ -8726,10 +9014,6 @@
         },
         {
           "type": "ignoring_block",
-          "named": true
-        },
-        {
-          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -8920,6 +9204,10 @@
           "named": true
         },
         {
+          "type": "handler_call",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -9088,10 +9376,6 @@
   },
   {
     "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "implicit_run_end",
     "named": true
   },
   {

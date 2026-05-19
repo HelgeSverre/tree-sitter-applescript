@@ -53,7 +53,10 @@ module.exports = grammar({
   ],
 
   rules: {
-    source_file: ($) => repeat($._item),
+    // `implicit_run_end` is only valid at the top level (orphan `end run`
+    // without a matching `on run` handler). Inside any block, `end run` is
+    // either a real handler terminator or an error.
+    source_file: ($) => repeat(choice($._item, $.implicit_run_end)),
 
     _item: ($) =>
       choice(
@@ -80,7 +83,6 @@ module.exports = grammar({
         $.exit_statement,
         $.continue_statement,
         $.log_statement,
-        $.implicit_run_end,
         $.command_call,
         $._expression
       ),
@@ -89,8 +91,9 @@ module.exports = grammar({
     // AppleScript wraps top-level statements in an implicit run handler, and
     // many real scripts put `end run` at the bottom for clarity. Use a single
     // multi-word token so the bare `keyword_end` rule (used by every other
-    // block) isn't perturbed.
-    implicit_run_end: ($) => token(seq(ci("end"), /\s+/, ci("run"))),
+    // block) isn't perturbed. Lower precedence than the handler terminator so
+    // a real `on run … end run` consumes `end run` as the closer first.
+    implicit_run_end: ($) => prec(-1, token(seq(ci("end"), /\s+/, ci("run")))),
 
     // ==================== HANDLERS ====================
 
@@ -108,16 +111,24 @@ module.exports = grammar({
     handler_definition: ($) =>
       prec.right(
         choice(
-          // Regular and Folder-Action shapes
+          // Regular and Folder-Action shapes. Parameters can be:
+          //   • a parenthesized list: `(a, b)`
+          //   • a bare identifier (Folder-Action style): `on open theItems`
+          //   • a list pattern: `on run {}`, `on open {a, b}` for droplets
+          // The terminator can be the bare `end` keyword, optionally followed
+          // by the handler name; or the single-token `end run` form for the
+          // run handler specifically.
           seq(
             field("keyword", $.keyword_function),
             field("name", choice($.identifier, $.folder_action_event)),
-            optional(choice($.parameter_list, $.identifier)),
+            optional(choice($.parameter_list, $.identifier, $.list)),
             repeat($.folder_action_param),
             optional($.given_clause),
             repeat($._item),
-            $.keyword_end,
-            optional(choice($.identifier, $.folder_action_event))
+            choice(
+              seq($.keyword_end, optional(choice($.identifier, $.folder_action_event))),
+              $.implicit_run_end
+            )
           ),
           // ObjC-style selector handler: each selector word is followed by
           // `:identifier`. The end clause repeats the selector words with
@@ -757,9 +768,24 @@ module.exports = grammar({
           $.new_specifier,
           $.raw_data,
           $.my_expression,
+          $.handler_call,
           $.identifier
         )
       ),
+
+    // Handler call as expression: `f()`, `userPicksFolder()`, `f(x, y)`.
+    // Distinct from `parenthesized_expression` so the trailing `()` glues
+    // tightly to the identifier instead of becoming an orphan node.
+    handler_call: ($) =>
+      prec(11, seq(
+        $.identifier,
+        token.immediate("("),
+        optional(seq(
+          choice($._expression, $.command_call),
+          repeat(seq(",", choice($._expression, $.command_call)))
+        )),
+        ")"
+      )),
 
     // `my <expr>` — script self-reference, used to call own handlers / refer
     // to own properties from inside a tell block: `my resolve_conflicts(x)`.
@@ -962,6 +988,9 @@ module.exports = grammar({
     specifier_prefix: ($) =>
       token(
         choice(
+          // Insertion points used by `make new X at <ins> of <container>`:
+          seq(ci("end"), /\s+/, ci("of")),
+          seq(ci("beginning"), /\s+/, ci("of")),
           ci("first"),
           ci("second"),
           ci("third"),
@@ -1049,6 +1078,8 @@ module.exports = grammar({
           seq(ci("text"), /\s+/, ci("field")),
           seq(ci("application"), /\s+/, ci("file")),
           seq(ci("application"), /\s+/, ci("process")),
+          seq(ci("folder"), /\s+/, ci("action")),
+          seq(ci("script"), /\s+/, ci("file")),
           seq(ci("document"), /\s+/, ci("file")),
           seq(ci("scroll"), /\s+/, ci("bar")),
           seq(ci("scroll"), /\s+/, ci("area")),
