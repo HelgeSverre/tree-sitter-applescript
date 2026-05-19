@@ -115,6 +115,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "bare_objc_call"
+        },
+        {
+          "type": "SYMBOL",
           "name": "command_call"
         },
         {
@@ -122,6 +126,65 @@
           "name": "_expression"
         }
       ]
+    },
+    "bare_objc_call": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "command_call"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "command_call"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     "implicit_run_end": {
       "type": "PREC",
@@ -3287,8 +3350,21 @@
           "type": "FIELD",
           "name": "value",
           "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "compound_name"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "command_call"
+              }
+            ]
           }
         }
       ]
@@ -4042,8 +4118,17 @@
             }
           },
           {
-            "type": "SYMBOL",
-            "name": "element_type"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "element_type"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            ]
           }
         ]
       }
@@ -4479,6 +4564,26 @@
               {
                 "type": "SYMBOL",
                 "name": "_expression"
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[eE][xX][iI][sS][tT][sS]"
+                }
               }
             ]
           }
@@ -4975,8 +5080,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "element_type"
+                  }
+                ]
               },
               {
                 "type": "BLANK"
@@ -4987,8 +5101,38 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "element_type"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "element_type"
+                  }
+                ]
               },
               {
                 "type": "BLANK"
@@ -5224,6 +5368,103 @@
               {
                 "type": "PATTERN",
                 "value": "[fF][iI][lL][eE]"
+              }
+            ]
+          },
+          {
+            "type": "PATTERN",
+            "value": "[aA][tT][tT][aA][cC][hH][mM][eE][nN][tT]"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[oO][uU][tT][gG][oO][iI][nN][gG]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[mM][eE][sS][sS][aA][gG][eE]"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[iI][nN][cC][oO][mM][iI][nN][gG]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[mM][eE][sS][sS][aA][gG][eE]"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[lL][iI][sS][tT]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[vV][iI][eE][wW]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[oO][pP][tT][iI][oO][nN][sS]"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[cC][oO][nN][tT][aA][iI][nN][eE][rR]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[wW][iI][nN][dD][oO][wW]"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[iI][nN][fF][oO][rR][mM][aA][tT][iI][oO][nN]"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\s+"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[wW][iI][nN][dD][oO][wW]"
               }
             ]
           },
@@ -6129,6 +6370,24 @@
     [
       "handler_definition",
       "_expression"
+    ],
+    [
+      "objc_handler_definition",
+      "_expression"
+    ],
+    [
+      "bare_objc_call",
+      "_expression"
+    ],
+    [
+      "objc_handler_definition",
+      "_expression",
+      "compound_name"
+    ],
+    [
+      "bare_objc_call",
+      "_expression",
+      "compound_name"
     ]
   ],
   "precedences": [],

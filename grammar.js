@@ -50,6 +50,10 @@ module.exports = grammar({
     [$.index_expression, $.property_reference],
     [$.handler_definition, $._expression, $.compound_name],
     [$.handler_definition, $._expression],
+    [$.objc_handler_definition, $._expression],
+    [$.bare_objc_call, $._expression],
+    [$.objc_handler_definition, $._expression, $.compound_name],
+    [$.bare_objc_call, $._expression, $.compound_name],
   ],
 
   rules: {
@@ -83,8 +87,23 @@ module.exports = grammar({
         $.exit_statement,
         $.continue_statement,
         $.log_statement,
+        $.bare_objc_call,
         $.command_call,
         $._expression
+      ),
+
+    // Bare ObjC selector call at statement level: `sortList:myList`,
+    // `splitString:s byDelim:d`. Distinct from `objc_selector_call` (which
+    // requires a `receiver's` prefix) so this form doesn't compete with
+    // record-entry syntax inside `{}`. Only valid as a top-level item.
+    bare_objc_call: ($) =>
+      prec.left(
+        seq(
+          $.identifier,
+          ":",
+          choice($._expression, $.command_call),
+          repeat(seq($.identifier, ":", choice($._expression, $.command_call)))
+        )
       ),
 
     // `end run` at the bottom of a script with no matching `on run` —
@@ -686,10 +705,12 @@ module.exports = grammar({
       ),
 
     // Named parameters for commands: with title "X", buttons {"OK"}, etc.
+    // The value may be an expression, a multi-word `compound_name`, or a
+    // bare `command_call` such as `default location path to desktop folder`.
     command_parameter: ($) =>
       seq(
         field("name", $.parameter_name),
-        field("value", $._expression)
+        field("value", choice($._expression, $.compound_name, $.command_call))
       ),
 
     parameter_name: ($) =>
@@ -825,7 +846,10 @@ module.exports = grammar({
     // `new <element_type>` — the argument shape used by `make`, e.g.
     // `make new folder at … with properties {…}` and `make new document`.
     new_specifier: ($) =>
-      prec.right(seq(token(ci("new")), $.element_type)),
+      prec.right(seq(
+        token(ci("new")),
+        choice($.element_type, $.identifier)
+      )),
 
     // Possessive accessor: `x's y` — common in modern AppleScript and
     // dominant in ASObjC (`current application's NSString`). The right side
@@ -920,7 +944,9 @@ module.exports = grammar({
         prec.left(3, seq($._expression, $.additive_operator, $._expression)),
         prec.left(4, seq($._expression, $.multiplicative_operator, $._expression)),
         // Exponentiation (right associative, highest precedence)
-        prec.right(5, seq($._expression, "^", $._expression))
+        prec.right(5, seq($._expression, "^", $._expression)),
+        // Postfix `exists` predicate: `folder X exists`
+        prec.left(1, seq($._expression, token(ci("exists"))))
       ),
 
     comparison_operator: ($) =>
@@ -1043,16 +1069,17 @@ module.exports = grammar({
         )
       ),
 
-    // A 1–3-word name. The first word may be an `element_type` (`file type`,
-    // `folder action`) which the lexer would otherwise greedily eat for an
-    // `index_expression`. Higher precedence than the bare-identifier path so
-    // when `of` follows, the multi-word interpretation wins via the explicit
+    // A 1–4-word name. Each word may be an `identifier` or an `element_type`
+    // — common dictionary names like `Folder Action scripts folder` mix
+    // both. Higher precedence than the bare-identifier path so when `of`
+    // follows, the multi-word interpretation wins via the explicit
     // conflict declaration.
     compound_name: ($) =>
       prec.right(seq(
         choice($.identifier, $.element_type),
-        optional($.identifier),
-        optional($.identifier)
+        optional(choice($.identifier, $.element_type)),
+        optional(choice($.identifier, $.element_type)),
+        optional(choice($.identifier, $.element_type))
       )),
 
     // Index expression: `item 1`, `window 2`, `paragraph 3 of foo`.
@@ -1097,6 +1124,12 @@ module.exports = grammar({
           seq(ci("application"), /\s+/, ci("process")),
           seq(ci("folder"), /\s+/, ci("action")),
           seq(ci("script"), /\s+/, ci("file")),
+          ci("attachment"),
+          seq(ci("outgoing"), /\s+/, ci("message")),
+          seq(ci("incoming"), /\s+/, ci("message")),
+          seq(ci("list"), /\s+/, ci("view"), /\s+/, ci("options")),
+          seq(ci("container"), /\s+/, ci("window")),
+          seq(ci("information"), /\s+/, ci("window")),
           seq(ci("document"), /\s+/, ci("file")),
           seq(ci("scroll"), /\s+/, ci("bar")),
           seq(ci("scroll"), /\s+/, ci("area")),
