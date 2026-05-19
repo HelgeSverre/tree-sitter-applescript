@@ -64,5 +64,5 @@ specific cause per file.
 | After commit `b3f40dd` (external scanner: block_comment + alias_prefix) | 10 | -98.6% |
 | After commit `dc093dc` (command_flag rule) | 10 | unchanged |
 | Quarantine 4 files into `known-limits/` | 0 (in active corpus) | — |
-| After commit `820980e` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
+| After commit `98fc987` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
 
