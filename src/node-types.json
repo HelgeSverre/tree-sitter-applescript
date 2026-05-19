@@ -851,10 +851,30 @@
       "required": false,
       "types": [
         {
+          "type": "command_flag",
+          "named": true
+        },
+        {
           "type": "command_parameter",
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "command_flag",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "command_flag_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -11038,6 +11058,10 @@
   },
   {
     "type": "boolean",
+    "named": true
+  },
+  {
+    "type": "command_flag_name",
     "named": true
   },
   {

@@ -715,7 +715,34 @@ module.exports = grammar({
         seq(
           field("command", $.command_name),
           optional(field("argument", choice($._expression, $.compound_name))),
-          repeat($.command_parameter)
+          repeat(choice($.command_parameter, $.command_flag))
+        )
+      ),
+
+    // Boolean flag parameter — `with multiple selections allowed`,
+    // `without invisibles`, `with hidden answer`. No value expression; the
+    // flag itself is the entire parameter. Listed before `command_parameter`
+    // in `command_call`'s repeat so the longest-match lexer favours it.
+    command_flag: ($) =>
+      field("name", $.command_flag_name),
+
+    command_flag_name: ($) =>
+      token(
+        choice(
+          seq(ci("with"), /\s+/, ci("multiple"), /\s+/, ci("selections"), /\s+/, ci("allowed")),
+          seq(ci("with"), /\s+/, ci("empty"), /\s+/, ci("selection"), /\s+/, ci("allowed")),
+          seq(ci("with"), /\s+/, ci("hidden"), /\s+/, ci("answer")),
+          seq(ci("with"), /\s+/, ci("administrator"), /\s+/, ci("privileges")),
+          seq(ci("with"), /\s+/, ci("data")),
+          seq(ci("with"), /\s+/, ci("replacing")),
+          seq(ci("with"), /\s+/, ci("transaction")),
+          seq(ci("with"), /\s+/, ci("invisibles")),
+          seq(ci("without"), /\s+/, ci("multiple"), /\s+/, ci("selections"), /\s+/, ci("allowed")),
+          seq(ci("without"), /\s+/, ci("empty"), /\s+/, ci("selection"), /\s+/, ci("allowed")),
+          seq(ci("without"), /\s+/, ci("hidden"), /\s+/, ci("answer")),
+          seq(ci("without"), /\s+/, ci("invisibles")),
+          seq(ci("without"), /\s+/, ci("transaction")),
+          seq(ci("without"), /\s+/, ci("replacing"))
         )
       ),
 
