@@ -36,6 +36,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -69,6 +73,10 @@
         },
         {
           "type": "multiplicative_operator",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -108,6 +116,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -125,6 +137,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -163,6 +179,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -188,6 +208,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -227,6 +251,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -247,6 +275,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "type_specifier",
           "named": true
         },
@@ -262,7 +294,7 @@
     "named": true,
     "fields": {
       "argument": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -283,6 +315,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -311,6 +347,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -350,6 +390,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -367,6 +411,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -412,7 +460,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -433,6 +481,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -461,6 +513,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -500,6 +556,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -520,11 +580,34 @@
             "named": true
           },
           {
+            "type": "the_keyword",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "compound_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "element_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -556,6 +639,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -581,6 +668,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -620,6 +711,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -637,6 +732,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -702,6 +801,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -738,6 +841,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -767,6 +874,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -807,6 +918,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -858,6 +973,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -900,7 +1019,7 @@
     "named": true,
     "fields": {
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -921,6 +1040,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -949,6 +1072,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -988,6 +1115,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -1005,6 +1136,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -1014,7 +1149,7 @@
         ]
       },
       "variable": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1035,6 +1170,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -1063,6 +1202,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -1102,6 +1245,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -1119,6 +1266,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -1199,6 +1350,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -1235,6 +1390,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -1264,6 +1423,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -1304,6 +1467,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -1351,6 +1518,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -1378,7 +1549,7 @@
     "named": true,
     "fields": {
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1399,6 +1570,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -1427,6 +1602,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -1466,6 +1645,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -1483,6 +1666,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -1533,6 +1720,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -1569,6 +1760,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -1602,6 +1797,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -1642,6 +1841,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -1686,6 +1889,10 @@
         },
         {
           "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -1756,6 +1963,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -1796,6 +2007,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -1825,6 +2040,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -1865,6 +2084,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -1909,6 +2132,10 @@
         },
         {
           "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -1978,6 +2205,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -2007,6 +2238,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -2046,6 +2281,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -2066,6 +2305,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -2082,6 +2325,21 @@
       "types": [
         {
           "type": "keyword_exit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "folder_action_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -2127,7 +2385,7 @@
     "fields": {
       "keyword": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "keyword_function",
@@ -2137,8 +2395,12 @@
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
+          {
+            "type": "folder_action_event",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
@@ -2187,6 +2449,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -2196,6 +2462,14 @@
         },
         {
           "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "folder_action_event",
+          "named": true
+        },
+        {
+          "type": "folder_action_param",
           "named": true
         },
         {
@@ -2224,6 +2498,10 @@
         },
         {
           "type": "ignoring_block",
+          "named": true
+        },
+        {
+          "type": "implicit_run_end",
           "named": true
         },
         {
@@ -2259,6 +2537,10 @@
           "named": true
         },
         {
+          "type": "my_expression",
+          "named": true
+        },
+        {
           "type": "new_specifier",
           "named": true
         },
@@ -2268,6 +2550,10 @@
         },
         {
           "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_handler_definition",
           "named": true
         },
         {
@@ -2300,6 +2586,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -2347,6 +2637,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -2374,7 +2668,7 @@
     "named": true,
     "fields": {
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2395,6 +2689,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -2423,6 +2721,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -2462,6 +2764,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -2479,6 +2785,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -2536,6 +2846,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -2583,6 +2897,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -2616,6 +2934,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -2656,6 +2978,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -2703,6 +3029,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -2730,7 +3060,7 @@
     "named": true,
     "fields": {
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2751,6 +3081,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -2779,6 +3113,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -2818,6 +3156,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -2838,6 +3180,10 @@
             "named": true
           },
           {
+            "type": "the_keyword",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
@@ -2854,7 +3200,7 @@
         ]
       },
       "then_action": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2894,6 +3240,10 @@
             "named": true
           },
           {
+            "type": "current_date",
+            "named": true
+          },
+          {
             "type": "date_literal",
             "named": true
           },
@@ -2930,6 +3280,10 @@
             "named": true
           },
           {
+            "type": "implicit_run_end",
+            "named": true
+          },
+          {
             "type": "index_expression",
             "named": true
           },
@@ -2955,6 +3309,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -2995,6 +3353,10 @@
           },
           {
             "type": "range_expression",
+            "named": true
+          },
+          {
+            "type": "raw_data",
             "named": true
           },
           {
@@ -3039,6 +3401,10 @@
           },
           {
             "type": "tell_simple_statement",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -3131,6 +3497,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -3167,6 +3537,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -3196,6 +3570,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -3236,6 +3614,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -3284,6 +3666,10 @@
         },
         {
           "type": "text_attribute",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -3338,6 +3724,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -3367,6 +3757,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -3406,6 +3800,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -3423,6 +3821,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -3553,11 +3955,19 @@
           "named": true
         },
         {
+          "type": "compound_name",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -3586,6 +3996,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -3625,6 +4039,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -3642,6 +4060,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -3699,6 +4121,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -3728,6 +4154,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -3767,6 +4197,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -3787,6 +4221,149 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "my_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "keyword_my",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "unary_expression",
           "named": true
         }
@@ -3803,6 +4380,256 @@
       "types": [
         {
           "type": "element_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "objc_handler_definition",
+    "named": true,
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "keyword_function",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "coercion_expression",
+          "named": true
+        },
+        {
+          "type": "command_call",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "considering_block",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "copy_statement",
+          "named": true
+        },
+        {
+          "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "error_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "global_declaration",
+          "named": true
+        },
+        {
+          "type": "handler_definition",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "if_simple_statement",
+          "named": true
+        },
+        {
+          "type": "ignoring_block",
+          "named": true
+        },
+        {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "it_reference",
+          "named": true
+        },
+        {
+          "type": "keyword_end",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "local_declaration",
+          "named": true
+        },
+        {
+          "type": "log_statement",
+          "named": true
+        },
+        {
+          "type": "me_reference",
+          "named": true
+        },
+        {
+          "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
+          "named": true
+        },
+        {
+          "type": "new_specifier",
+          "named": true
+        },
+        {
+          "type": "null_value",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "objc_selector_call",
+          "named": true
+        },
+        {
+          "type": "object_specifier",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "possessive_expression",
+          "named": true
+        },
+        {
+          "type": "property_declaration",
+          "named": true
+        },
+        {
+          "type": "property_reference",
+          "named": true
+        },
+        {
+          "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "reference_to_expression",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "result_reference",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "script_block",
+          "named": true
+        },
+        {
+          "type": "set_statement",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "tell_block",
+          "named": true
+        },
+        {
+          "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
+          "type": "timeout_block",
+          "named": true
+        },
+        {
+          "type": "try_block",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "use_statement",
+          "named": true
+        },
+        {
+          "type": "using_terms_block",
           "named": true
         }
       ]
@@ -3837,6 +4664,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -3862,6 +4693,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -3905,6 +4740,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -3922,6 +4761,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -3952,11 +4795,19 @@
           "named": true
         },
         {
+          "type": "compound_name",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -3985,6 +4836,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4024,6 +4879,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4045,6 +4904,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4078,7 +4941,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -4099,6 +4962,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -4127,6 +4994,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4166,6 +5037,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4183,6 +5058,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4213,11 +5092,19 @@
           "named": true
         },
         {
+          "type": "command_call",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -4246,6 +5133,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4285,6 +5176,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4302,6 +5197,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4332,11 +5231,19 @@
           "named": true
         },
         {
+          "type": "compound_name",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -4365,6 +5272,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4408,6 +5319,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4425,6 +5340,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4449,7 +5368,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -4470,6 +5389,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -4498,6 +5421,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -4537,6 +5464,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -4554,6 +5485,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -4595,11 +5530,19 @@
           "named": true
         },
         {
+          "type": "compound_name",
+          "named": true
+        },
+        {
           "type": "concatenation",
           "named": true
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -4628,6 +5571,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4667,6 +5614,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4684,6 +5635,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4722,6 +5677,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -4751,6 +5710,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4794,6 +5757,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4811,6 +5778,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4864,6 +5835,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -4889,6 +5864,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -4928,6 +5907,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -4945,6 +5928,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -4978,7 +5965,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -4999,6 +5986,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -5027,6 +6018,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -5066,6 +6061,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -5083,6 +6082,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -5148,6 +6151,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -5184,6 +6191,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -5213,6 +6224,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -5253,6 +6268,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -5297,6 +6316,10 @@
         },
         {
           "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -5356,6 +6379,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -5385,6 +6412,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -5424,6 +6455,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -5441,6 +6476,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -5516,6 +6555,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -5552,6 +6595,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -5581,6 +6628,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -5628,6 +6679,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -5672,6 +6727,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -5699,7 +6758,7 @@
     "named": true,
     "fields": {
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -5720,6 +6779,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -5748,6 +6811,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -5787,6 +6854,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -5804,6 +6875,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -5813,7 +6888,7 @@
         ]
       },
       "variable": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -5829,11 +6904,19 @@
             "named": true
           },
           {
+            "type": "compound_name",
+            "named": true
+          },
+          {
             "type": "concatenation",
             "named": true
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -5862,6 +6945,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -5901,6 +6988,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -5918,6 +7009,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -5983,6 +7078,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -6019,6 +7118,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -6044,6 +7147,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -6084,6 +7191,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -6128,6 +7239,10 @@
         },
         {
           "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -6183,7 +7298,7 @@
         ]
       },
       "target": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -6204,6 +7319,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -6232,6 +7351,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -6271,6 +7394,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -6288,6 +7415,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -6338,6 +7469,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -6374,6 +7509,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -6403,6 +7542,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -6443,6 +7586,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -6490,6 +7637,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -6517,7 +7668,7 @@
     "named": true,
     "fields": {
       "action": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -6542,6 +7693,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -6570,6 +7725,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -6609,6 +7768,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -6634,6 +7797,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -6730,6 +7897,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -6766,6 +7937,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -6795,6 +7970,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -6835,6 +8014,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -6879,6 +8062,10 @@
         },
         {
           "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -6960,6 +8147,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -7000,6 +8191,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -7029,6 +8224,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -7069,6 +8268,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -7113,6 +8316,10 @@
         },
         {
           "type": "tell_simple_statement",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -7167,6 +8374,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -7192,6 +8403,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -7231,6 +8446,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -7248,6 +8467,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -7295,7 +8518,7 @@
         ]
       },
       "source": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -7316,6 +8539,10 @@
           },
           {
             "type": "current_application",
+            "named": true
+          },
+          {
+            "type": "current_date",
             "named": true
           },
           {
@@ -7344,6 +8571,10 @@
           },
           {
             "type": "missing_value",
+            "named": true
+          },
+          {
+            "type": "my_expression",
             "named": true
           },
           {
@@ -7383,6 +8614,10 @@
             "named": true
           },
           {
+            "type": "raw_data",
+            "named": true
+          },
+          {
             "type": "record",
             "named": true
           },
@@ -7400,6 +8635,10 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "the_keyword",
             "named": true
           },
           {
@@ -7450,6 +8689,10 @@
           "named": true
         },
         {
+          "type": "current_date",
+          "named": true
+        },
+        {
           "type": "date_literal",
           "named": true
         },
@@ -7486,6 +8729,10 @@
           "named": true
         },
         {
+          "type": "implicit_run_end",
+          "named": true
+        },
+        {
           "type": "index_expression",
           "named": true
         },
@@ -7515,6 +8762,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -7555,6 +8806,10 @@
         },
         {
           "type": "range_expression",
+          "named": true
+        },
+        {
+          "type": "raw_data",
           "named": true
         },
         {
@@ -7602,6 +8857,10 @@
           "named": true
         },
         {
+          "type": "the_keyword",
+          "named": true
+        },
+        {
           "type": "timeout_block",
           "named": true
         },
@@ -7629,7 +8888,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -7650,6 +8909,10 @@
         },
         {
           "type": "current_application",
+          "named": true
+        },
+        {
+          "type": "current_date",
           "named": true
         },
         {
@@ -7678,6 +8941,10 @@
         },
         {
           "type": "missing_value",
+          "named": true
+        },
+        {
+          "type": "my_expression",
           "named": true
         },
         {
@@ -7717,6 +8984,10 @@
           "named": true
         },
         {
+          "type": "raw_data",
+          "named": true
+        },
+        {
           "type": "record",
           "named": true
         },
@@ -7734,6 +9005,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "the_keyword",
           "named": true
         },
         {
@@ -7796,6 +9071,10 @@
     "named": true
   },
   {
+    "type": "current_date",
+    "named": true
+  },
+  {
     "type": "element_type",
     "named": true
   },
@@ -7804,7 +9083,15 @@
     "named": true
   },
   {
+    "type": "folder_action_event",
+    "named": true
+  },
+  {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "implicit_run_end",
     "named": true
   },
   {
@@ -7849,6 +9136,10 @@
   },
   {
     "type": "keyword_log",
+    "named": true
+  },
+  {
+    "type": "keyword_my",
     "named": true
   },
   {
@@ -7920,11 +9211,19 @@
     "named": true
   },
   {
+    "type": "raw_data",
+    "named": true
+  },
+  {
     "type": "specifier_prefix",
     "named": true
   },
   {
     "type": "text_attribute",
+    "named": true
+  },
+  {
+    "type": "the_keyword",
     "named": true
   },
   {

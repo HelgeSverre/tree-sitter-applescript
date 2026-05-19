@@ -34,7 +34,8 @@ name of theFile
 
 (source_file
   (property_reference
-    (identifier)
+    (compound_name
+      (identifier))
     (identifier)))
 
 ================================================================================

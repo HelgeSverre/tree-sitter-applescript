@@ -28,13 +28,28 @@ module.exports = grammar({
   // tokenizes `me` inside `home`, `of` inside `office`, etc.
   word: ($) => $.identifier,
 
-  // Note: `¬` (U+00AC) is AppleScript's line-continuation glyph, not the
-  // logical NOT operator (that's the keyword `not`). Treat it as whitespace
-  // so a `¬` at the end of a line transparently joins the next line.
+  // Note: `¬` (U+00AC) is AppleScript's line-continuation glyph, not logical
+  // NOT (that's the keyword `not`). Treat as whitespace so a trailing `¬`
+  // transparently joins the next line.
   extras: ($) => [/\s/, /¬/, $.comment],
 
   conflicts: ($) => [
     [$.record, $.list],
+    // compound_name's optional 2nd/3rd identifier creates internal ambiguity
+    // (does `current view` stop at `current` or eat `view` too?). GLR keeps
+    // both alive; whichever extends into a valid property_reference wins.
+    [$.compound_name],
+    [$._expression, $.compound_name],
+    [$._expression],
+    [$.object_specifier, $.property_reference],
+    [$.else_clause],
+    [$.else_if_clause],
+    [$.if_block, $.if_simple_statement],
+    // `file type of x` should be property_reference(compound_name(file type), x),
+    // not index_expression(file, property_reference(type, x)).
+    [$.index_expression, $.property_reference],
+    [$.handler_definition, $._expression, $.compound_name],
+    [$.handler_definition, $._expression],
   ],
 
   rules: {
@@ -65,24 +80,93 @@ module.exports = grammar({
         $.exit_statement,
         $.continue_statement,
         $.log_statement,
+        $.implicit_run_end,
         $.command_call,
         $._expression
       ),
 
+    // `end run` at the bottom of a script with no matching `on run` —
+    // AppleScript wraps top-level statements in an implicit run handler, and
+    // many real scripts put `end run` at the bottom for clarity. Use a single
+    // multi-word token so the bare `keyword_end` rule (used by every other
+    // block) isn't perturbed.
+    implicit_run_end: ($) => token(seq(ci("end"), /\s+/, ci("run"))),
+
     // ==================== HANDLERS ====================
 
-    // Handler definition: on/to handler_name(params) ... end [handler_name]
+    // Handler definition:
+    //   `on greet(name) … end greet`
+    //   `on opening folder fld … end opening folder`
+    //   `on adding folder items to fld after receiving items … end …`
+    //   `on sortList:theList … end sortList:`
+    //   `on splitString:s byDelim:d … end splitString:byDelim:`
+    //
+    // Three header shapes:
+    //   1. Regular: identifier + parenthesized params (or bare identifier param)
+    //   2. Folder-Action: multi-word event + folder + prepositional clauses
+    //   3. ObjC-bridge: identifier `:` ident (identifier `:` ident)+
     handler_definition: ($) =>
       prec.right(
-        seq(
-          field("keyword", $.keyword_function),
-          field("name", $.identifier),
-          optional($.parameter_list),
-          optional($.given_clause),
-          repeat($._item),
-          $.keyword_end,
-          optional($.identifier)
+        choice(
+          // Regular and Folder-Action shapes
+          seq(
+            field("keyword", $.keyword_function),
+            field("name", choice($.identifier, $.folder_action_event)),
+            optional(choice($.parameter_list, $.identifier)),
+            repeat($.folder_action_param),
+            optional($.given_clause),
+            repeat($._item),
+            $.keyword_end,
+            optional(choice($.identifier, $.folder_action_event))
+          ),
+          // ObjC-style selector handler: each selector word is followed by
+          // `:identifier`. The end clause repeats the selector words with
+          // trailing colons but no parameters.
+          $.objc_handler_definition
         )
+      ),
+
+    objc_handler_definition: ($) =>
+      prec.right(seq(
+        field("keyword", $.keyword_function),
+        $.identifier,
+        ":",
+        $.identifier,
+        repeat(seq($.identifier, ":", $.identifier)),
+        repeat($._item),
+        $.keyword_end,
+        optional(seq($.identifier, ":", repeat(seq($.identifier, ":"))))
+      )),
+
+    // Multi-word Folder Action event names. Single-token so the rest of the
+    // header doesn't have to peek ahead at individual words.
+    folder_action_event: ($) =>
+      token(
+        choice(
+          seq(ci("adding"), /\s+/, ci("folder"), /\s+/, ci("items"), /\s+/, ci("to")),
+          seq(ci("removing"), /\s+/, ci("folder"), /\s+/, ci("items"), /\s+/, ci("from")),
+          seq(ci("moving"), /\s+/, ci("folder"), /\s+/, ci("window"), /\s+/, ci("for")),
+          seq(ci("closing"), /\s+/, ci("folder"), /\s+/, ci("window"), /\s+/, ci("for")),
+          seq(ci("opening"), /\s+/, ci("folder"), /\s+/, ci("window")),
+          seq(ci("opening"), /\s+/, ci("folder")),
+          seq(ci("closing"), /\s+/, ci("folder")),
+          seq(ci("adding"), /\s+/, ci("folder"), /\s+/, ci("items")),
+          seq(ci("removing"), /\s+/, ci("folder"), /\s+/, ci("items"))
+        )
+      ),
+
+    // Prepositional argument used by Folder Action handlers and similar:
+    // `after receiving items`, `from rect`, the bare folder identifier.
+    folder_action_param: ($) =>
+      seq(
+        token(
+          choice(
+            seq(ci("after"), /\s+/, ci("receiving")),
+            ci("from"),
+            ci("for")
+          )
+        ),
+        $.identifier
       ),
 
     keyword_on: ($) => token(ci("on")),
@@ -179,8 +263,11 @@ module.exports = grammar({
     // ==================== IF BLOCK ====================
 
     // If block: if condition then ... [else if ... then ...] [else ...] end [if]
+    // Higher precedence than `if_simple_statement` so a multi-line if with an
+    // `end if` doesn't get sliced into `if_simple_statement` + orphaned `end`.
     if_block: ($) =>
       prec.right(
+        3,
         seq(
           field("keyword", $.keyword_if),
           field("condition", $._expression),
@@ -193,10 +280,12 @@ module.exports = grammar({
         )
       ),
 
-    // One-line if: if x then return y
+    // One-line if: `if x then return y`. Lower precedence than `if_block` so
+    // a multi-line `if/then/.../end if` doesn't get sliced into a simple if
+    // plus an orphaned `end if`.
     if_simple_statement: ($) =>
       prec.right(
-        2,
+        1,
         seq(
           field("keyword", $.keyword_if),
           field("condition", $._expression),
@@ -422,10 +511,12 @@ module.exports = grammar({
     // ==================== STATEMENTS ====================
 
     // Set statement
+    // `set <target> to <value>`. Target can be a multi-word property name
+    // (`folder actions enabled`, `current view`).
     set_statement: ($) =>
       seq(
         $.keyword_set,
-        field("variable", $._expression),
+        field("variable", choice($._expression, $.compound_name)),
         token(ci("to")),
         field("value", $._expression)
       ),
@@ -629,37 +720,65 @@ module.exports = grammar({
 
     // ==================== EXPRESSIONS ====================
 
-    // Expressions - simplified to avoid ambiguity
+    // Expressions. `the` is decorative in AppleScript (`set the x to the name
+    // of the file`); it may appear before any noun phrase. We consume an
+    // optional `the` at the start of every expression so it doesn't have to
+    // be sprinkled through every other rule.
     _expression: ($) =>
-      choice(
-        $.binary_expression,
-        $.unary_expression,
-        $.string,
-        $.number,
-        $.boolean,
-        $.missing_value,
-        $.null_value,
-        $.current_application,
-        $.me_reference,
-        $.it_reference,
-        $.result_reference,
-        $.list,
-        $.record,
-        $.parenthesized_expression,
-        $.reference,
-        $.object_specifier,
-        $.property_reference,
-        $.index_expression,
-        $.range_expression,
-        $.coercion_expression,
-        $.concatenation,
-        $.reference_to_expression,
-        $.date_literal,
-        $.objc_selector_call,
-        $.possessive_expression,
-        $.new_specifier,
-        $.identifier
+      seq(
+        optional($.the_keyword),
+        choice(
+          $.binary_expression,
+          $.unary_expression,
+          $.string,
+          $.number,
+          $.boolean,
+          $.missing_value,
+          $.null_value,
+          $.current_application,
+          $.current_date,
+          $.me_reference,
+          $.it_reference,
+          $.result_reference,
+          $.list,
+          $.record,
+          $.parenthesized_expression,
+          $.reference,
+          $.object_specifier,
+          $.property_reference,
+          $.index_expression,
+          $.range_expression,
+          $.coercion_expression,
+          $.concatenation,
+          $.reference_to_expression,
+          $.date_literal,
+          $.objc_selector_call,
+          $.possessive_expression,
+          $.new_specifier,
+          $.raw_data,
+          $.my_expression,
+          $.identifier
+        )
       ),
+
+    // `my <expr>` — script self-reference, used to call own handlers / refer
+    // to own properties from inside a tell block: `my resolve_conflicts(x)`.
+    // Bumped precedence so the leading `my` keyword wins over the bare-
+    // identifier path through `_expression`.
+    my_expression: ($) =>
+      prec.right(10, seq($.keyword_my, $._expression)),
+
+    keyword_my: ($) => token(ci("my")),
+
+    // AppleScript raw data literal: «class fold», «data utxt201C», etc.
+    // Used in decompiled scripts for special types/strings. Built as a token
+    // sequence rather than a single regex because tree-sitter's lexer
+    // generation can drop tokens whose regex includes non-ASCII anchor
+    // characters.
+    raw_data: ($) =>
+      token(seq("«", /[A-Za-z0-9 ]+/, "»")),
+
+    the_keyword: ($) => token(ci("the")),
 
     // `new <element_type>` — the argument shape used by `make`, e.g.
     // `make new folder at … with properties {…}` and `make new document`.
@@ -667,12 +786,14 @@ module.exports = grammar({
       prec.right(seq(token(ci("new")), $.element_type)),
 
     // Possessive accessor: `x's y` — common in modern AppleScript and
-    // dominant in ASObjC (`current application's NSString`).
+    // dominant in ASObjC (`current application's NSString`). The right side
+    // is `compound_name` so multi-word app-dictionary property names
+    // (`AppleScript's text item delimiters`) parse as a single accessor.
     // Higher precedence than binary operators so `x's y + z` is `(x's y) + z`.
     possessive_expression: ($) =>
       prec.left(
         7,
-        seq($._expression, $.possessive, $.identifier)
+        seq($._expression, $.possessive, $.compound_name)
       ),
 
     // ObjC bridge method call: `receiver's selector:arg [label:arg ...]`.
@@ -706,9 +827,30 @@ module.exports = grammar({
     date_literal: ($) =>
       seq(token(ci("date")), $.string),
 
-    parenthesized_expression: ($) => seq("(", repeat($._expression), ")"),
+    // Parens can wrap a command call when used as a value:
+    // `(path to home folder)`, `(do shell script "uname -m")`. They can also
+    // serve as the argument list of a handler call: `f(x, y, z)`. Otherwise
+    // plain expressions.
+    parenthesized_expression: ($) =>
+      seq(
+        "(",
+        optional(seq(
+          choice($.command_call, $._expression),
+          repeat(seq(",", choice($.command_call, $._expression)))
+        )),
+        ")"
+      ),
 
-    list: ($) => seq("{", optional(seq($._expression, repeat(seq(",", $._expression)))), "}"),
+    // List literal — items can be plain expressions or multi-word application
+    // constants like `Eight channel` (Image Events' colorspace names).
+    list: ($) =>
+      seq(
+        "{",
+        optional(seq($._list_item, repeat(seq(",", $._list_item)))),
+        "}"
+      ),
+
+    _list_item: ($) => choice($._expression, $.compound_name),
 
     record: ($) => seq("{", $.record_entry, repeat(seq(",", $.record_entry)), "}"),
 
@@ -794,16 +936,18 @@ module.exports = grammar({
 
     // ==================== OBJECT SPECIFIERS ====================
 
-    // Object specifier: window 1 of application "Finder"
-    // Optional trailing whose/where filter: every file of home whose size > 1000
+    // Object specifier: `window 1 of application "Finder"`, also `every word`
+    // (no `of` tail). Optional trailing `whose | where` filter:
+    // `every file of home whose size > 1000`.
+    // The `_expression` slot accepts compound_name so multi-word element types
+    // (`UI element`, `static text`) parse cleanly.
     object_specifier: ($) =>
       prec.left(
         3,
         seq(
           $.specifier_prefix,
-          $._expression,
-          token(ci("of")),
-          $._expression,
+          choice($._expression, $.compound_name),
+          optional(seq(token(ci("of")), $._expression)),
           optional($.whose_clause)
         )
       ),
@@ -838,38 +982,54 @@ module.exports = grammar({
         )
       ),
 
-    // Property reference: `name of theFile`. Multi-word app-dictionary
-    // properties (e.g. `current view of window`) are not handled here —
-    // those require the application's `.sdef` dictionary that tree-sitter
-    // does not have access to.
+    // Property reference: `name of theFile`, also multi-word app-dictionary
+    // properties like `current view of window`, `name extension of theFile`,
+    // `folder actions enabled`. The leading words come from application
+    // dictionaries that tree-sitter cannot inspect statically, so we accept
+    // 1–3 consecutive identifiers as the property name.
     property_reference: ($) =>
       prec.left(
         3,
         seq(
-          $.identifier,
+          $.compound_name,
           token(ci("of")),
           $._expression
         )
       ),
 
-    // Index expression: item 1, window 2, paragraph 3
+    // A 1–3-word name. The first word may be an `element_type` (`file type`,
+    // `folder action`) which the lexer would otherwise greedily eat for an
+    // `index_expression`. Higher precedence than the bare-identifier path so
+    // when `of` follows, the multi-word interpretation wins via the explicit
+    // conflict declaration.
+    compound_name: ($) =>
+      prec.right(seq(
+        choice($.identifier, $.element_type),
+        optional($.identifier),
+        optional($.identifier)
+      )),
+
+    // Index expression: `item 1`, `window 2`, `paragraph 3 of foo`.
+    // The optional `of <expr>` tail makes `item 1 of FS` parse as a single
+    // object reference rather than splitting after `item 1`.
     index_expression: ($) =>
       prec.left(
         4,
         seq(
           $.element_type,
-          $._expression
+          $._expression,
+          optional(seq(token(ci("of")), $._expression))
         )
       ),
 
     element_type: ($) =>
       token(
         choice(
+          // Common single-word element types
           ci("item"),
           ci("word"),
           ci("character"),
           ci("paragraph"),
-          ci("text item"),
           ci("line"),
           ci("window"),
           ci("document"),
@@ -879,11 +1039,35 @@ module.exports = grammar({
           ci("process"),
           ci("button"),
           ci("menu"),
-          ci("menu item"),
-          ci("text field"),
           ci("row"),
           ci("column"),
-          ci("cell")
+          ci("cell"),
+          // Common multi-word element types from Finder, System Events,
+          // and Image Events dictionaries that real scripts use freely.
+          seq(ci("text"), /\s+/, ci("item")),
+          seq(ci("menu"), /\s+/, ci("item")),
+          seq(ci("text"), /\s+/, ci("field")),
+          seq(ci("application"), /\s+/, ci("file")),
+          seq(ci("application"), /\s+/, ci("process")),
+          seq(ci("document"), /\s+/, ci("file")),
+          seq(ci("scroll"), /\s+/, ci("bar")),
+          seq(ci("scroll"), /\s+/, ci("area")),
+          seq(ci("static"), /\s+/, ci("text")),
+          seq(ci("UI"), /\s+/, ci("element")),
+          seq(ci("menu"), /\s+/, ci("bar")),
+          seq(ci("menu"), /\s+/, ci("bar"), /\s+/, ci("item")),
+          seq(ci("tool"), /\s+/, ci("bar")),
+          seq(ci("title"), /\s+/, ci("bar")),
+          seq(ci("status"), /\s+/, ci("bar")),
+          seq(ci("text"), /\s+/, ci("area")),
+          seq(ci("color"), /\s+/, ci("well")),
+          seq(ci("combo"), /\s+/, ci("box")),
+          seq(ci("check"), /\s+/, ci("box")),
+          seq(ci("radio"), /\s+/, ci("button")),
+          seq(ci("radio"), /\s+/, ci("group")),
+          seq(ci("pop"), /\s+/, ci("up"), /\s+/, ci("button")),
+          seq(ci("disclosure"), /\s+/, ci("triangle")),
+          seq(ci("incrementor"), /\s+/, ci("button"))
         )
       ),
 
@@ -945,6 +1129,9 @@ module.exports = grammar({
     // ==================== SPECIAL REFERENCES ====================
 
     current_application: ($) => token(seq(ci("current"), /\s+/, ci("application"))),
+
+    // `current date` — built-in expression returning the current date object.
+    current_date: ($) => token(seq(ci("current"), /\s+/, ci("date"))),
 
     me_reference: ($) => token(ci("me")),
 
