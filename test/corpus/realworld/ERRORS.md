@@ -1,6 +1,6 @@
 # Real-world corpus — current state
 
-**33 of 33 active files parse with zero ERROR and zero MISSING nodes.**
+**34 of 34 active files parse with zero ERROR and zero MISSING nodes.**
 
 ## Per-file ERROR counts
 
@@ -8,6 +8,7 @@
 | --- | ---: | ---: |
 | `asobjc/basic_asobjc.applescript` | 0 | 0 |
 | `asobjc/foundation_arrays.applescript` | 0 | 0 |
+| `edge_cases/comment_tags.applescript` | 0 | 0 |
 | `edge_cases/dates_and_continuation.applescript` | 0 | 0 |
 | `edge_cases/insertion_points.applescript` | 0 | 0 |
 | `edge_cases/whose_and_every.applescript` | 0 | 0 |
@@ -42,7 +43,7 @@
 
 ## Quarantined files
 
-Three files remain in `known-limits/` because they exhibit parser
+Two files remain in `known-limits/` because they exhibit parser
 limitations that require external-scanner work beyond what landed this
 session. See [`known-limits/README.md`](known-limits/README.md) for the
 specific cause per file.
@@ -50,7 +51,6 @@ specific cause per file.
 | File | ERROR | MISSING |
 | --- | ---: | ---: |
 | `known-limits/attach_folder_action.applescript` | 3 | 0 |
-| `known-limits/comment_tags.applescript` | 2 | 0 |
 | `known-limits/remove_folder_actions.applescript` | 3 | 0 |
 
 ## How we got here
@@ -65,4 +65,5 @@ specific cause per file.
 | After commit `dc093dc` (command_flag rule) | 10 | unchanged |
 | Quarantine 4 files into `known-limits/` | 0 (in active corpus) | — |
 | After commit `98fc987` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
+| Task 3.2 (bound multi-word tokens to a single line, un-quarantined `comment_tags.applescript`) | 0 (active corpus, 34/34) | — |
 

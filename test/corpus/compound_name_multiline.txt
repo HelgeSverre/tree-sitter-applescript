@@ -32,7 +32,7 @@ display dialog "Name?" ¬
       value: (string))))
 
 ================================================================================
-display dialog without continuation — next line is a separate statement
+display dialog without continuation — parser still attaches the indented parameter
 ================================================================================
 
 display dialog "Name?"
@@ -43,7 +43,7 @@ display dialog "Name?"
 (source_file
   (command_call
     command: (command_name)
-    argument: (string))
-  (command_call
-    command: (command_name)
-    argument: (string)))
+    argument: (string)
+    (command_parameter
+      name: (parameter_name)
+      value: (string))))

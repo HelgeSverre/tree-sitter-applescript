@@ -141,7 +141,7 @@ module.exports = grammar({
     // multi-word token so the bare `keyword_end` rule (used by every other
     // block) isn't perturbed. Lower precedence than the handler terminator so
     // a real `on run … end run` consumes `end run` as the closer first.
-    implicit_run_end: ($) => prec(-1, token(seq(ci("end"), /\s+/, ci("run")))),
+    implicit_run_end: ($) => prec(-1, token(seq(ci("end"), /[ \t]+/, ci("run")))),
 
     // ==================== HANDLERS ====================
 
@@ -204,15 +204,15 @@ module.exports = grammar({
     folder_action_event: ($) =>
       token(
         choice(
-          seq(ci("adding"), /\s+/, ci("folder"), /\s+/, ci("items"), /\s+/, ci("to")),
-          seq(ci("removing"), /\s+/, ci("folder"), /\s+/, ci("items"), /\s+/, ci("from")),
-          seq(ci("moving"), /\s+/, ci("folder"), /\s+/, ci("window"), /\s+/, ci("for")),
-          seq(ci("closing"), /\s+/, ci("folder"), /\s+/, ci("window"), /\s+/, ci("for")),
-          seq(ci("opening"), /\s+/, ci("folder"), /\s+/, ci("window")),
-          seq(ci("opening"), /\s+/, ci("folder")),
-          seq(ci("closing"), /\s+/, ci("folder")),
-          seq(ci("adding"), /\s+/, ci("folder"), /\s+/, ci("items")),
-          seq(ci("removing"), /\s+/, ci("folder"), /\s+/, ci("items"))
+          seq(ci("adding"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("items"), /[ \t]+/, ci("to")),
+          seq(ci("removing"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("items"), /[ \t]+/, ci("from")),
+          seq(ci("moving"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("window"), /[ \t]+/, ci("for")),
+          seq(ci("closing"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("window"), /[ \t]+/, ci("for")),
+          seq(ci("opening"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("window")),
+          seq(ci("opening"), /[ \t]+/, ci("folder")),
+          seq(ci("closing"), /[ \t]+/, ci("folder")),
+          seq(ci("adding"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("items")),
+          seq(ci("removing"), /[ \t]+/, ci("folder"), /[ \t]+/, ci("items"))
         )
       ),
 
@@ -222,7 +222,7 @@ module.exports = grammar({
       seq(
         token(
           choice(
-            seq(ci("after"), /\s+/, ci("receiving")),
+            seq(ci("after"), /[ \t]+/, ci("receiving")),
             ci("from"),
             ci("for")
           )
@@ -392,7 +392,7 @@ module.exports = grammar({
         repeat($._item)
       ),
 
-    keyword_else_if: ($) => token(seq(ci("else"), /\s+/, ci("if"))),
+    keyword_else_if: ($) => token(seq(ci("else"), /[ \t]+/, ci("if"))),
 
     else_clause: ($) => seq($.keyword_else, repeat($._item)),
 
@@ -466,7 +466,7 @@ module.exports = grammar({
         )
       ),
 
-    keyword_on_error: ($) => token(seq(ci("on"), /\s+/, ci("error"))),
+    keyword_on_error: ($) => token(seq(ci("on"), /[ \t]+/, ci("error"))),
 
     // ==================== CONSIDERING/IGNORING BLOCKS ====================
 
@@ -506,14 +506,14 @@ module.exports = grammar({
     // `considering` or `ignoring` block.
     but_ignoring_clause: ($) =>
       seq(
-        token(seq(ci("but"), /\s+/, ci("ignoring"))),
+        token(seq(ci("but"), /[ \t]+/, ci("ignoring"))),
         $.text_attribute,
         repeat(seq(token(choice(",", ci("and"))), $.text_attribute))
       ),
 
     but_considering_clause: ($) =>
       seq(
-        token(seq(ci("but"), /\s+/, ci("considering"))),
+        token(seq(ci("but"), /[ \t]+/, ci("considering"))),
         $.text_attribute,
         repeat(seq(token(choice(",", ci("and"))), $.text_attribute))
       ),
@@ -526,9 +526,9 @@ module.exports = grammar({
           ci("hyphens"),
           ci("punctuation"),
           ci("white space"),
-          seq(ci("numeric"), /\s+/, ci("strings")),
+          seq(ci("numeric"), /[ \t]+/, ci("strings")),
           ci("expansion"),
-          seq(ci("application"), /\s+/, ci("responses"))
+          seq(ci("application"), /[ \t]+/, ci("responses"))
         )
       ),
 
@@ -548,7 +548,7 @@ module.exports = grammar({
         )
       ),
 
-    keyword_with_timeout: ($) => token(seq(ci("with"), /\s+/, ci("timeout"))),
+    keyword_with_timeout: ($) => token(seq(ci("with"), /[ \t]+/, ci("timeout"))),
 
     // ==================== TRANSACTION BLOCK ====================
 
@@ -566,7 +566,7 @@ module.exports = grammar({
         )
       ),
 
-    keyword_with_transaction: ($) => token(seq(ci("with"), /\s+/, ci("transaction"))),
+    keyword_with_transaction: ($) => token(seq(ci("with"), /[ \t]+/, ci("transaction"))),
 
     // ==================== USING TERMS FROM BLOCK ====================
 
@@ -578,11 +578,11 @@ module.exports = grammar({
           field("source", $._expression),
           repeat($._item),
           $.keyword_end,
-          optional(token(seq(ci("using"), /\s+/, ci("terms"), /\s+/, ci("from"))))
+          optional(token(seq(ci("using"), /[ \t]+/, ci("terms"), /[ \t]+/, ci("from"))))
         )
       ),
 
-    keyword_using_terms_from: ($) => token(seq(ci("using"), /\s+/, ci("terms"), /\s+/, ci("from"))),
+    keyword_using_terms_from: ($) => token(seq(ci("using"), /[ \t]+/, ci("terms"), /[ \t]+/, ci("from"))),
 
     // ==================== USE STATEMENTS ====================
 
@@ -614,8 +614,8 @@ module.exports = grammar({
 
     use_importing_clause: ($) =>
       token(choice(
-        seq(ci("with"), /\s+/, ci("importing")),
-        seq(ci("without"), /\s+/, ci("importing"))
+        seq(ci("with"), /[ \t]+/, ci("importing")),
+        seq(ci("without"), /[ \t]+/, ci("importing"))
       )),
 
     keyword_use: ($) => token(ci("use")),
@@ -767,20 +767,20 @@ module.exports = grammar({
     command_flag_name: ($) =>
       token(
         choice(
-          seq(ci("with"), /\s+/, ci("multiple"), /\s+/, ci("selections"), /\s+/, ci("allowed")),
-          seq(ci("with"), /\s+/, ci("empty"), /\s+/, ci("selection"), /\s+/, ci("allowed")),
-          seq(ci("with"), /\s+/, ci("hidden"), /\s+/, ci("answer")),
-          seq(ci("with"), /\s+/, ci("administrator"), /\s+/, ci("privileges")),
-          seq(ci("with"), /\s+/, ci("data")),
-          seq(ci("with"), /\s+/, ci("replacing")),
-          seq(ci("with"), /\s+/, ci("transaction")),
-          seq(ci("with"), /\s+/, ci("invisibles")),
-          seq(ci("without"), /\s+/, ci("multiple"), /\s+/, ci("selections"), /\s+/, ci("allowed")),
-          seq(ci("without"), /\s+/, ci("empty"), /\s+/, ci("selection"), /\s+/, ci("allowed")),
-          seq(ci("without"), /\s+/, ci("hidden"), /\s+/, ci("answer")),
-          seq(ci("without"), /\s+/, ci("invisibles")),
-          seq(ci("without"), /\s+/, ci("transaction")),
-          seq(ci("without"), /\s+/, ci("replacing"))
+          seq(ci("with"), /[ \t]+/, ci("multiple"), /[ \t]+/, ci("selections"), /[ \t]+/, ci("allowed")),
+          seq(ci("with"), /[ \t]+/, ci("empty"), /[ \t]+/, ci("selection"), /[ \t]+/, ci("allowed")),
+          seq(ci("with"), /[ \t]+/, ci("hidden"), /[ \t]+/, ci("answer")),
+          seq(ci("with"), /[ \t]+/, ci("administrator"), /[ \t]+/, ci("privileges")),
+          seq(ci("with"), /[ \t]+/, ci("data")),
+          seq(ci("with"), /[ \t]+/, ci("replacing")),
+          seq(ci("with"), /[ \t]+/, ci("transaction")),
+          seq(ci("with"), /[ \t]+/, ci("invisibles")),
+          seq(ci("without"), /[ \t]+/, ci("multiple"), /[ \t]+/, ci("selections"), /[ \t]+/, ci("allowed")),
+          seq(ci("without"), /[ \t]+/, ci("empty"), /[ \t]+/, ci("selection"), /[ \t]+/, ci("allowed")),
+          seq(ci("without"), /[ \t]+/, ci("hidden"), /[ \t]+/, ci("answer")),
+          seq(ci("without"), /[ \t]+/, ci("invisibles")),
+          seq(ci("without"), /[ \t]+/, ci("transaction")),
+          seq(ci("without"), /[ \t]+/, ci("replacing"))
         )
       ),
 
@@ -788,40 +788,40 @@ module.exports = grammar({
       token(
         choice(
           // Standard additions
-          seq(ci("display"), /\s+/, ci("dialog")),
-          seq(ci("display"), /\s+/, ci("alert")),
-          seq(ci("display"), /\s+/, ci("notification")),
-          seq(ci("choose"), /\s+/, ci("file")),
-          seq(ci("choose"), /\s+/, ci("folder")),
-          seq(ci("choose"), /\s+/, ci("from"), /\s+/, ci("list")),
-          seq(ci("choose"), /\s+/, ci("color")),
-          seq(ci("do"), /\s+/, ci("shell"), /\s+/, ci("script")),
-          seq(ci("run"), /\s+/, ci("script")),
-          seq(ci("load"), /\s+/, ci("script")),
-          seq(ci("store"), /\s+/, ci("script")),
-          seq(ci("path"), /\s+/, ci("to")),
-          seq(ci("info"), /\s+/, ci("for")),
-          seq(ci("list"), /\s+/, ci("folder")),
-          seq(ci("list"), /\s+/, ci("disks")),
-          seq(ci("system"), /\s+/, ci("info")),
-          seq(ci("system"), /\s+/, ci("attribute")),
+          seq(ci("display"), /[ \t]+/, ci("dialog")),
+          seq(ci("display"), /[ \t]+/, ci("alert")),
+          seq(ci("display"), /[ \t]+/, ci("notification")),
+          seq(ci("choose"), /[ \t]+/, ci("file")),
+          seq(ci("choose"), /[ \t]+/, ci("folder")),
+          seq(ci("choose"), /[ \t]+/, ci("from"), /[ \t]+/, ci("list")),
+          seq(ci("choose"), /[ \t]+/, ci("color")),
+          seq(ci("do"), /[ \t]+/, ci("shell"), /[ \t]+/, ci("script")),
+          seq(ci("run"), /[ \t]+/, ci("script")),
+          seq(ci("load"), /[ \t]+/, ci("script")),
+          seq(ci("store"), /[ \t]+/, ci("script")),
+          seq(ci("path"), /[ \t]+/, ci("to")),
+          seq(ci("info"), /[ \t]+/, ci("for")),
+          seq(ci("list"), /[ \t]+/, ci("folder")),
+          seq(ci("list"), /[ \t]+/, ci("disks")),
+          seq(ci("system"), /[ \t]+/, ci("info")),
+          seq(ci("system"), /[ \t]+/, ci("attribute")),
           // `current date` is intentionally not listed here — it's modelled
           // as a built-in expression (`current_date`) so it can participate
           // in arithmetic (`current date + 5 * days`).
-          seq(ci("time"), /\s+/, ci("to"), /\s+/, ci("GMT")),
-          seq(ci("random"), /\s+/, ci("number")),
+          seq(ci("time"), /[ \t]+/, ci("to"), /[ \t]+/, ci("GMT")),
+          seq(ci("random"), /[ \t]+/, ci("number")),
           seq(ci("round")),
           seq(ci("read")),
           seq(ci("write")),
-          seq(ci("open"), /\s+/, ci("for"), /\s+/, ci("access")),
-          seq(ci("close"), /\s+/, ci("access")),
-          seq(ci("get"), /\s+/, ci("eof")),
-          seq(ci("set"), /\s+/, ci("eof")),
-          seq(ci("clipboard"), /\s+/, ci("info")),
-          seq(ci("set"), /\s+/, ci("the"), /\s+/, ci("clipboard"), /\s+/, ci("to")),
-          seq(ci("the"), /\s+/, ci("clipboard")),
-          seq(ci("ASCII"), /\s+/, ci("number")),
-          seq(ci("ASCII"), /\s+/, ci("character")),
+          seq(ci("open"), /[ \t]+/, ci("for"), /[ \t]+/, ci("access")),
+          seq(ci("close"), /[ \t]+/, ci("access")),
+          seq(ci("get"), /[ \t]+/, ci("eof")),
+          seq(ci("set"), /[ \t]+/, ci("eof")),
+          seq(ci("clipboard"), /[ \t]+/, ci("info")),
+          seq(ci("set"), /[ \t]+/, ci("the"), /[ \t]+/, ci("clipboard"), /[ \t]+/, ci("to")),
+          seq(ci("the"), /[ \t]+/, ci("clipboard")),
+          seq(ci("ASCII"), /[ \t]+/, ci("number")),
+          seq(ci("ASCII"), /[ \t]+/, ci("character")),
           seq(ci("offset")),
           seq(ci("summarize")),
           seq(ci("beep")),
@@ -874,24 +874,24 @@ module.exports = grammar({
       token(
         choice(
           // Common parameter names
-          seq(ci("with"), /\s+/, ci("title")),
-          seq(ci("with"), /\s+/, ci("prompt")),
-          seq(ci("with"), /\s+/, ci("icon")),
-          seq(ci("with"), /\s+/, ci("properties")),
-          seq(ci("without"), /\s+/, ci("hidden"), /\s+/, ci("answer")),
-          seq(ci("default"), /\s+/, ci("answer")),
-          seq(ci("default"), /\s+/, ci("button")),
-          seq(ci("default"), /\s+/, ci("color")),
-          seq(ci("default"), /\s+/, ci("name")),
-          seq(ci("default"), /\s+/, ci("location")),
-          seq(ci("default"), /\s+/, ci("items")),
-          seq(ci("giving"), /\s+/, ci("up"), /\s+/, ci("after")),
+          seq(ci("with"), /[ \t]+/, ci("title")),
+          seq(ci("with"), /[ \t]+/, ci("prompt")),
+          seq(ci("with"), /[ \t]+/, ci("icon")),
+          seq(ci("with"), /[ \t]+/, ci("properties")),
+          seq(ci("without"), /[ \t]+/, ci("hidden"), /[ \t]+/, ci("answer")),
+          seq(ci("default"), /[ \t]+/, ci("answer")),
+          seq(ci("default"), /[ \t]+/, ci("button")),
+          seq(ci("default"), /[ \t]+/, ci("color")),
+          seq(ci("default"), /[ \t]+/, ci("name")),
+          seq(ci("default"), /[ \t]+/, ci("location")),
+          seq(ci("default"), /[ \t]+/, ci("items")),
+          seq(ci("giving"), /[ \t]+/, ci("up"), /[ \t]+/, ci("after")),
           // Image Events parameter names: `rotate X to angle N`,
           // `scale X by factor N`, `pad X with pad color C`, etc.
-          seq(ci("to"), /\s+/, ci("angle")),
-          seq(ci("by"), /\s+/, ci("factor")),
-          seq(ci("to"), /\s+/, ci("size")),
-          seq(ci("with"), /\s+/, ci("pad"), /\s+/, ci("color")),
+          seq(ci("to"), /[ \t]+/, ci("angle")),
+          seq(ci("by"), /[ \t]+/, ci("factor")),
+          seq(ci("to"), /[ \t]+/, ci("size")),
+          seq(ci("with"), /[ \t]+/, ci("pad"), /[ \t]+/, ci("color")),
           ci("buttons"),
           ci("using"),
           ci("at"),
@@ -907,24 +907,24 @@ module.exports = grammar({
           ci("through"),
           ci("before"),
           ci("after"),
-          ci("instead"), seq(/\s+/, ci("of")),
+          ci("instead"), seq(/[ \t]+/, ci("of")),
           ci("into"),
           ci("onto"),
           ci("between"),
           ci("against"),
           ci("above"),
           ci("below"),
-          ci("aside"), seq(/\s+/, ci("from")),
+          ci("aside"), seq(/[ \t]+/, ci("from")),
           ci("around"),
           ci("beside"),
           ci("beneath"),
           ci("under"),
           ci("over"),
           ci("named"),
-          seq(ci("starting"), /\s+/, ci("at")),
-          seq(ci("multiple"), /\s+/, ci("selections"), /\s+/, ci("allowed")),
-          seq(ci("empty"), /\s+/, ci("selection"), /\s+/, ci("allowed")),
-          seq(ci("of"), /\s+/, ci("type")),
+          seq(ci("starting"), /[ \t]+/, ci("at")),
+          seq(ci("multiple"), /[ \t]+/, ci("selections"), /[ \t]+/, ci("allowed")),
+          seq(ci("empty"), /[ \t]+/, ci("selection"), /[ \t]+/, ci("allowed")),
+          seq(ci("of"), /[ \t]+/, ci("type")),
           seq(ci("invisibles"))
         )
       ),
@@ -1007,8 +1007,8 @@ module.exports = grammar({
     relative_position: ($) =>
       token(
         choice(
-          seq(ci("in"), /\s+/, ci("front"), /\s+/, ci("of")),
-          seq(ci("in"), /\s+/, ci("back"), /\s+/, ci("of")),
+          seq(ci("in"), /[ \t]+/, ci("front"), /[ \t]+/, ci("of")),
+          seq(ci("in"), /[ \t]+/, ci("back"), /[ \t]+/, ci("of")),
           ci("before"),
           ci("after"),
           ci("behind")
@@ -1123,7 +1123,7 @@ module.exports = grammar({
     // Use a single multi-word token so a bare `a` identifier (`a or b`) is unaffected.
     reference_to_expression: ($) =>
       prec.right(seq(
-        token(seq(ci("a"), /\s+/, ci("reference"), /\s+/, ci("to"))),
+        token(seq(ci("a"), /[ \t]+/, ci("reference"), /[ \t]+/, ci("to"))),
         $._expression
       )),
 
@@ -1330,8 +1330,8 @@ module.exports = grammar({
       token(
         choice(
           // Insertion points used by `make new X at <ins> of <container>`:
-          seq(ci("end"), /\s+/, ci("of")),
-          seq(ci("beginning"), /\s+/, ci("of")),
+          seq(ci("end"), /[ \t]+/, ci("of")),
+          seq(ci("beginning"), /[ \t]+/, ci("of")),
           ci("first"),
           ci("second"),
           ci("third"),
@@ -1417,38 +1417,38 @@ module.exports = grammar({
           ci("cell"), ci("cells"),
           // Common multi-word element types from Finder, System Events,
           // and Image Events dictionaries that real scripts use freely.
-          seq(ci("text"), /\s+/, ci("item")),
-          seq(ci("menu"), /\s+/, ci("item")),
-          seq(ci("text"), /\s+/, ci("field")),
-          seq(ci("application"), /\s+/, ci("file")),
-          seq(ci("application"), /\s+/, ci("process")),
-          seq(ci("folder"), /\s+/, ci("action")),
-          seq(ci("script"), /\s+/, ci("file")),
+          seq(ci("text"), /[ \t]+/, ci("item")),
+          seq(ci("menu"), /[ \t]+/, ci("item")),
+          seq(ci("text"), /[ \t]+/, ci("field")),
+          seq(ci("application"), /[ \t]+/, ci("file")),
+          seq(ci("application"), /[ \t]+/, ci("process")),
+          seq(ci("folder"), /[ \t]+/, ci("action")),
+          seq(ci("script"), /[ \t]+/, ci("file")),
           ci("attachment"),
-          seq(ci("outgoing"), /\s+/, ci("message")),
-          seq(ci("incoming"), /\s+/, ci("message")),
-          seq(ci("list"), /\s+/, ci("view"), /\s+/, ci("options")),
-          seq(ci("container"), /\s+/, ci("window")),
-          seq(ci("information"), /\s+/, ci("window")),
-          seq(ci("document"), /\s+/, ci("file")),
-          seq(ci("scroll"), /\s+/, ci("bar")),
-          seq(ci("scroll"), /\s+/, ci("area")),
-          seq(ci("static"), /\s+/, ci("text")),
-          seq(ci("UI"), /\s+/, ci("element")),
-          seq(ci("menu"), /\s+/, ci("bar")),
-          seq(ci("menu"), /\s+/, ci("bar"), /\s+/, ci("item")),
-          seq(ci("tool"), /\s+/, ci("bar")),
-          seq(ci("title"), /\s+/, ci("bar")),
-          seq(ci("status"), /\s+/, ci("bar")),
-          seq(ci("text"), /\s+/, ci("area")),
-          seq(ci("color"), /\s+/, ci("well")),
-          seq(ci("combo"), /\s+/, ci("box")),
-          seq(ci("check"), /\s+/, ci("box")),
-          seq(ci("radio"), /\s+/, ci("button")),
-          seq(ci("radio"), /\s+/, ci("group")),
-          seq(ci("pop"), /\s+/, ci("up"), /\s+/, ci("button")),
-          seq(ci("disclosure"), /\s+/, ci("triangle")),
-          seq(ci("incrementor"), /\s+/, ci("button"))
+          seq(ci("outgoing"), /[ \t]+/, ci("message")),
+          seq(ci("incoming"), /[ \t]+/, ci("message")),
+          seq(ci("list"), /[ \t]+/, ci("view"), /[ \t]+/, ci("options")),
+          seq(ci("container"), /[ \t]+/, ci("window")),
+          seq(ci("information"), /[ \t]+/, ci("window")),
+          seq(ci("document"), /[ \t]+/, ci("file")),
+          seq(ci("scroll"), /[ \t]+/, ci("bar")),
+          seq(ci("scroll"), /[ \t]+/, ci("area")),
+          seq(ci("static"), /[ \t]+/, ci("text")),
+          seq(ci("UI"), /[ \t]+/, ci("element")),
+          seq(ci("menu"), /[ \t]+/, ci("bar")),
+          seq(ci("menu"), /[ \t]+/, ci("bar"), /[ \t]+/, ci("item")),
+          seq(ci("tool"), /[ \t]+/, ci("bar")),
+          seq(ci("title"), /[ \t]+/, ci("bar")),
+          seq(ci("status"), /[ \t]+/, ci("bar")),
+          seq(ci("text"), /[ \t]+/, ci("area")),
+          seq(ci("color"), /[ \t]+/, ci("well")),
+          seq(ci("combo"), /[ \t]+/, ci("box")),
+          seq(ci("check"), /[ \t]+/, ci("box")),
+          seq(ci("radio"), /[ \t]+/, ci("button")),
+          seq(ci("radio"), /[ \t]+/, ci("group")),
+          seq(ci("pop"), /[ \t]+/, ci("up"), /[ \t]+/, ci("button")),
+          seq(ci("disclosure"), /[ \t]+/, ci("triangle")),
+          seq(ci("incrementor"), /[ \t]+/, ci("button"))
         )
       ),
 
@@ -1492,29 +1492,29 @@ module.exports = grammar({
           ci("date"),
           ci("file"),
           ci("alias"),
-          seq(ci("POSIX"), /\s+/, ci("file")),
-          seq(ci("POSIX"), /\s+/, ci("path")),
+          seq(ci("POSIX"), /[ \t]+/, ci("file")),
+          seq(ci("POSIX"), /[ \t]+/, ci("path")),
           ci("class"),
           ci("constant"),
           ci("script"),
-          seq(ci("Unicode"), /\s+/, ci("text")),
-          seq(ci("styled"), /\s+/, ci("text")),
+          seq(ci("Unicode"), /[ \t]+/, ci("text")),
+          seq(ci("styled"), /[ \t]+/, ci("text")),
           ci("data"),
           ci("reference"),
           ci("ref"),  // short form of `reference`
           ci("anything"),
-          seq(ci("list"), /\s+/, ci("of"), /\s+/, ci("text")),
-          seq(ci("list"), /\s+/, ci("of"), /\s+/, ci("integer")),
-          seq(ci("list"), /\s+/, ci("of"), /\s+/, ci("number"))
+          seq(ci("list"), /[ \t]+/, ci("of"), /[ \t]+/, ci("text")),
+          seq(ci("list"), /[ \t]+/, ci("of"), /[ \t]+/, ci("integer")),
+          seq(ci("list"), /[ \t]+/, ci("of"), /[ \t]+/, ci("number"))
         )
       ),
 
     // ==================== SPECIAL REFERENCES ====================
 
-    current_application: ($) => token(seq(ci("current"), /\s+/, ci("application"))),
+    current_application: ($) => token(seq(ci("current"), /[ \t]+/, ci("application"))),
 
     // `current date` — built-in expression returning the current date object.
-    current_date: ($) => token(seq(ci("current"), /\s+/, ci("date"))),
+    current_date: ($) => token(seq(ci("current"), /[ \t]+/, ci("date"))),
 
     me_reference: ($) => token(ci("me")),
 
@@ -1576,7 +1576,7 @@ module.exports = grammar({
 
     boolean: ($) => token(choice(ci("true"), ci("false"))),
 
-    missing_value: ($) => token(seq(ci("missing"), /\s+/, ci("value"))),
+    missing_value: ($) => token(seq(ci("missing"), /[ \t]+/, ci("value"))),
 
     // ==================== IDENTIFIERS & COMMENTS ====================
 

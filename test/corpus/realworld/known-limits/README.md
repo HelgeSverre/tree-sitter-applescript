@@ -1,6 +1,6 @@
 # Known parser limits
 
-The three `.applescript` files in this directory are real AppleScript scripts (decompiled from Apple's `/Library/Scripts/`) that the current grammar **cannot fully parse without ERROR nodes**. They are kept here so they're not lost — anyone working on the parser should be able to test against them — but they are excluded from the corpus pass measurement at the parent level.
+The `.applescript` files in this directory are real AppleScript scripts (decompiled from Apple's `/Library/Scripts/`) that the current grammar **cannot fully parse without ERROR nodes**. They are kept here so they're not lost — anyone working on the parser should be able to test against them — but they are excluded from the corpus pass measurement at the parent level.
 
 ## Why they're here
 
@@ -8,13 +8,13 @@ Each file exhibits a specific parser limitation documented in [`docs/references/
 
 | File | Errors | Root cause |
 | --- | ---: | --- |
-| `comment_tags.applescript` | 2 | Cascade from a sub-pattern that even the quote-aware block-comment scanner can't fully recover from. Remaining errors are not in the block comment itself but in code following it. |
 | `attach_folder_action.applescript` | 3 | Outer `if_block` terminator: `end if` where `if` could be either the optional handler-name or a fresh `keyword_if` starting a new construct. Tree-sitter's GLR picks the wrong one. |
 | `remove_folder_actions.applescript` | 3 | Same outer-`if`-terminator cascade as `attach_folder_action.applescript`, plus the `to` ambiguity from `colorsync_extract.applescript`. |
 
 ## Resolved
 
 - `colorsync_extract.applescript` — fixed by column-aware `keyword_handler_to` (v1.4.0).
+- `comment_tags.applescript` — fixed by bounding multi-word tokens to a single line (Task 3.2). Moved to `edge_cases/`.
 
 ## How to re-include these once the parser improves
 
