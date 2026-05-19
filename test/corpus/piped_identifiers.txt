@@ -1,0 +1,52 @@
+================================================================================
+Piped identifier as set target
+================================================================================
+
+set |the user's name| to "Jane"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (set_statement
+    (keyword_set)
+    variable: (piped_identifier)
+    (keyword_to)
+    (string)))
+
+================================================================================
+Piped identifier in property access
+================================================================================
+
+set x to |class| of theItem
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (set_statement
+    (keyword_set)
+    variable: (identifier)
+    (keyword_to)
+    (property_reference
+      (compound_name
+        (piped_identifier))
+      (identifier))))
+
+================================================================================
+Piped identifier in handler parameter list
+================================================================================
+
+on greet(|first name|, |last name|)
+end greet
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (handler_definition
+    keyword: (keyword_function
+      (keyword_on))
+    name: (identifier)
+    (parameter_list
+      (piped_identifier)
+      (piped_identifier))
+    (keyword_end)
+    (identifier)))
