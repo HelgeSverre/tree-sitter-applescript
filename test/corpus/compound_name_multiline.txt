@@ -1,0 +1,49 @@
+================================================================================
+display dialog with default answer parameter
+================================================================================
+
+display dialog "Name?" default answer ""
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (command_call
+    command: (command_name)
+    argument: (string)
+    (command_parameter
+      name: (parameter_name)
+      value: (string))))
+
+================================================================================
+display dialog with parameter on next line via continuation
+================================================================================
+
+display dialog "Name?" ¬
+    default answer ""
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (command_call
+    command: (command_name)
+    argument: (string)
+    (command_parameter
+      name: (parameter_name)
+      value: (string))))
+
+================================================================================
+display dialog without continuation — next line is a separate statement
+================================================================================
+
+display dialog "Name?"
+    default answer ""
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (command_call
+    command: (command_name)
+    argument: (string))
+  (command_call
+    command: (command_name)
+    argument: (string)))
