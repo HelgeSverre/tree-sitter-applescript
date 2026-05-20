@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install tree-sitter CLI
+        # Pinned: matches the version used in the consuming zed-applescript
+        # extension's CI so the regen here matches what Zed will produce.
+        run: npm install -g tree-sitter-cli@0.22
+
+      - name: Install grammar deps
+        run: npm install
+
+      - name: Regenerate parser
+        run: npx tree-sitter generate
+
+      - name: Run fixture test suite
+        run: npx tree-sitter test
+
+      - name: Verify real-world corpus parses cleanly
+        run: |
+          failed=0
+          for f in $(find test/corpus/realworld -name '*.applescript' -not -path '*/known-limits/*'); do
+            out=$(npx tree-sitter parse "$f" 2>&1 | grep -E 'ERROR|MISSING' || true)
+            if [ -n "$out" ]; then
+              echo "FAIL: $f"
+              echo "$out"
+              failed=1
+            fi
+          done
+          if [ "$failed" -eq 1 ]; then
+            echo "::error::One or more real-world corpus files failed to parse cleanly."
+            exit 1
+          fi
+          count=$(find test/corpus/realworld -name '*.applescript' -not -path '*/known-limits/*' | wc -l | tr -d ' ')
+          echo "✓ All $count active real-world corpus files parse with zero ERROR + zero MISSING."
