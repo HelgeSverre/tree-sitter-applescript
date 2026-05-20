@@ -1078,9 +1078,18 @@ module.exports = grammar({
           // Months
           ci("January"), ci("February"), ci("March"), ci("April"),
           ci("May"), ci("June"), ci("July"), ci("August"),
-          ci("September"), ci("October"), ci("November"), ci("December"),
-          // Time-unit constants for date arithmetic
-          ci("seconds"), ci("minutes"), ci("hours"), ci("days"), ci("weeks")
+          ci("September"), ci("October"), ci("November"), ci("December")
+          // Time-unit names (`seconds`, `minutes`, `hours`, `days`, `weeks`)
+          // are deliberately NOT in this list. They appear in two contexts:
+          //   1. Date arithmetic — `set t to current date + 2 * hours`. Here
+          //      they parse as plain `identifier`, which is sufficient for
+          //      highlighting and outline; nothing is lost by not naming them.
+          //   2. `with timeout of 30 seconds` — that block has its own
+          //      dedicated `seconds` keyword token inside `timeout_block`,
+          //      unaffected by this list.
+          // Listing them as `applescript_constant` blocks them from being
+          // used as property names (e.g. `hours of theDate`, which is a
+          // common pattern when poking at date records).
         )
       ),
 
@@ -1089,7 +1098,10 @@ module.exports = grammar({
     // tightly to the identifier instead of becoming an orphan node.
     handler_call: ($) =>
       prec(11, seq(
-        $.identifier,
+        // Callee can be a plain or piped identifier — `f()`,
+        // `userPicksFolder()`, `|length|()` (ASObjC no-arg method via
+        // a piped selector name).
+        choice($.identifier, $.piped_identifier),
         token.immediate("("),
         optional(seq(
           choice($._expression, $.command_call),
@@ -1195,9 +1207,17 @@ module.exports = grammar({
 
     record: ($) => seq("{", $.record_entry, repeat(seq(",", $.record_entry)), "}"),
 
-    // Record entry. Key may be multi-word (`file name: x`, `disclosure
-    // triangle: y`) since AppleScript app dictionaries use such keys freely.
-    record_entry: ($) => seq($.compound_name, ":", $._expression),
+    // Record entry. Both key AND value may be multi-word, since
+    // AppleScript app dictionaries use such forms freely:
+    //   {file name: x, disclosure triangle: y}   ← multi-word keys
+    //   {repetition method: start after completion}  ← multi-word value
+    // The value form is NOT valid generic AppleScript per `osacompile`;
+    // it only resolves when the receiving app's dictionary defines
+    // those words as enumeration constants. This is lenient editor-time
+    // parsing: OmniFocus / Mail / Calendar scripts use this pattern
+    // heavily and we'd rather highlight them right than be strict.
+    record_entry: ($) =>
+      seq($.compound_name, ":", choice($._expression, $.compound_name)),
 
     reference: ($) =>
       seq(
@@ -1597,7 +1617,10 @@ module.exports = grammar({
           // insensitive). Listed BEFORE the plain numeric pattern so the
           // longer ordinal token wins via longest-match lexing.
           /-?\d+(st|nd|rd|th|ST|ND|RD|TH)/,
-          /-?\d+(\.\d+)?(E[+-]?\d+)?/
+          /-?\d+(\.\d+)?(E[+-]?\d+)?/,
+          // Leading-dot form: `.5`, `-.25`. Common in window-manager
+          // scripts that compute screen fractions; AppleScript accepts it.
+          /-?\.\d+(E[+-]?\d+)?/
         )
       ),
 
@@ -1623,7 +1646,10 @@ module.exports = grammar({
       token(
         choice(
           seq("--", /.*/),
-          seq("#!", /.*/)
+          // `#!` listed before `#` so the shebang form wins via longest-
+          // match lexing when both could fire on the first line.
+          seq("#!", /.*/),
+          seq("#", /.*/)
         )
       ),
   },

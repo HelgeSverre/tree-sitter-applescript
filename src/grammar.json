@@ -5144,26 +5144,6 @@
           {
             "type": "PATTERN",
             "value": "[dD][eE][cC][eE][mM][bB][eE][rR]"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[sS][eE][cC][oO][nN][dD][sS]"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[mM][iI][nN][uU][tT][eE][sS]"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[hH][oO][uU][rR][sS]"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[dD][aA][yY][sS]"
-          },
-          {
-            "type": "PATTERN",
-            "value": "[wW][eE][eE][kK][sS]"
           }
         ]
       }
@@ -5175,8 +5155,17 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "piped_identifier"
+              }
+            ]
           },
           {
             "type": "IMMEDIATE_TOKEN",
@@ -5625,8 +5614,17 @@
           "value": ":"
         },
         {
-          "type": "SYMBOL",
-          "name": "_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "compound_name"
+            }
+          ]
         }
       ]
     },
@@ -7740,6 +7738,10 @@
           {
             "type": "PATTERN",
             "value": "-?\\d+(\\.\\d+)?(E[+-]?\\d+)?"
+          },
+          {
+            "type": "PATTERN",
+            "value": "-?\\.\\d+(E[+-]?\\d+)?"
           }
         ]
       }
@@ -7821,6 +7823,19 @@
               {
                 "type": "STRING",
                 "value": "#!"
+              },
+              {
+                "type": "PATTERN",
+                "value": ".*"
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "#"
               },
               {
                 "type": "PATTERN",
