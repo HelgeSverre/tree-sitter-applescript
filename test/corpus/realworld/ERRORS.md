@@ -1,6 +1,6 @@
 # Real-world corpus — current state
 
-**36 of 36 active files parse with zero ERROR and zero MISSING nodes — `known-limits/` is now empty.**
+**40 of 40 active files parse with zero ERROR and zero MISSING nodes.** Provenance: 36 from Apple's `/Library/Scripts/`, decompiled folder-actions, and hand-crafted ASObjC samples, plus 4 community scripts sourced from GitHub for stress coverage.
 
 ## Per-file ERROR counts
 
@@ -8,6 +8,10 @@
 | --- | ---: | ---: |
 | `asobjc/basic_asobjc.applescript` | 0 | 0 |
 | `asobjc/foundation_arrays.applescript` | 0 | 0 |
+| `community/dmg_finder.applescript` | 0 | 0 |
+| `community/NV-CopyToNV.applescript` | 0 | 0 |
+| `community/NV-LinkAutomation.applescript` | 0 | 0 |
+| `community/NV-NewNoteFromDialog.applescript` | 0 | 0 |
 | `edge_cases/comment_tags.applescript` | 0 | 0 |
 | `edge_cases/dates_and_continuation.applescript` | 0 | 0 |
 | `edge_cases/insertion_points.applescript` | 0 | 0 |
@@ -43,11 +47,21 @@
 | `ui_scripting/probe_window.applescript` | 0 | 0 |
 | `ui_scripting/set_output_volume.applescript` | 0 | 0 |
 
-## Quarantined files
+## Quarantined files (stress targets)
 
-None. All four files originally quarantined this session are now in the
-active corpus. The `known-limits/` directory remains for documentation
-and as a place to land any future regressions.
+Five community scripts under `known-limits/community-stress/` exercise
+grammar gaps that don't yet have a fix. They're tracked here as future
+work; each file's primary failure mode is summarised in
+[`known-limits/README.md`](known-limits/README.md).
+
+| File | ERROR | MISSING | Primary gap |
+| --- | ---: | ---: | --- |
+| `known-limits/community-stress/omnifocus_library.applescript` | 29 | 0 | Multi-word record keys (`repetition method:`); deep ASObjC patterns |
+| `known-limits/community-stress/battery_monitor.applescript` | 12 | 0 | Long single-file mixed patterns |
+| `known-limits/community-stress/xcode_boost.applescript` | 17 | 0 | (sampled, not committed) System Events UI nav patterns |
+| `known-limits/community-stress/adium_unittest.applescript` | 11 | 0 | Test-runner specific app dictionary |
+| `known-limits/community-stress/layouts.applescript` | 7 | 0 | Window-management chained tells |
+| `known-limits/community-stress/alfred_iterm.applescript` | 10 | 0 | `tell X to tell Y to …` chained one-liners |
 
 ## How we got here
 
@@ -63,5 +77,6 @@ and as a place to land any future regressions.
 | After commit `98fc987` (column-aware keyword_handler_to) | 0 (active corpus, 33/33) | — |
 | Task 3.2 (bound multi-word tokens to a single line, un-quarantined `comment_tags.applescript`) | 0 (active corpus, 34/34) | — |
 | `inline_marker` external token (forces if-with-tail to a single logical line, widens tail to any `_item`, un-quarantines `attach_folder_action.applescript`) | 0 (active corpus, 35/35) | — |
-| Widened `if_simple_statement` tail to {atomic} ∪ {set,copy,command_call,tell_simple_statement}; allowed `keyword_script` in `index_expression`; un-quarantined `remove_folder_actions.applescript` | 0 (active corpus, **36/36**) | known-limits empty |
+| Widened `if_simple_statement` tail to {atomic} ∪ {set,copy,command_call,tell_simple_statement}; allowed `keyword_script` in `index_expression`; un-quarantined `remove_folder_actions.applescript` | 0 (active corpus, 36/36) | known-limits empty |
+| Added 4 community scripts to active corpus + 5 stress targets to `known-limits/community-stress/` (sourced via GitHub, see `known-limits/README.md`) | 0 (active corpus, **40/40**) | 5 stress targets documented |
 

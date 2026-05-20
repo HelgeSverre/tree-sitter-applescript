@@ -1,10 +1,24 @@
 # Known parser limits
 
-**This directory is currently empty of `.applescript` files.** All four files originally quarantined this session (`colorsync_extract`, `comment_tags`, `attach_folder_action`, `remove_folder_actions`) are now in the active corpus.
+Files here exercise grammar gaps that don't have a fix yet. They are excluded from the corpus pass measurement at the parent level so a "0 ERROR" claim on the active corpus stays honest, while still serving as regression targets when grammar work resumes.
 
-The folder is kept as a documented place for future grammar regressions to land.
+## community-stress/
 
-## History
+Five substantial community AppleScript files sourced from GitHub in v1.8.5. Each is sized and shaped to stress the grammar; together they document where the next round of grammar work would have the highest payoff.
+
+| File | Lines | ERROR / MISSING | What it exercises |
+| --- | ---: | ---: | --- |
+| `community-stress/omnifocus_library.applescript` | 579 | 29 / 0 | Multi-word record keys (`{repetition method: start after completion}`); deep ASObjC patterns; `use application "OmniFocus"` then immediate property/handler stream |
+| `community-stress/battery_monitor.applescript` | 228 | 12 / 0 | Mixed long single-file app; UI scripting + Foundation classes |
+| `community-stress/layouts.applescript` | 148 | 7 / 0 | Window-management chained tells; computed-property handler calls |
+| `community-stress/adium_unittest.applescript` | 106 | 11 / 0 | App-dictionary specific to Adium; test-runner control flow |
+| `community-stress/alfred_iterm.applescript` | 94 | 10 / 0 | `tell X to tell Y to tell Z to <action>` chained one-liners |
+
+Sources: `brandonpittman/OmniFocus`, `unforswearing/applescript`, `jgallen23/layouts`, `adium/adium`, `vitorgalvao/custom-alfred-iterm-scripts` — see commit history for the exact upstream commits the snapshots were taken from.
+
+To work on a fix: parse one file, look at the first ERROR, find the smallest reproducer, write a fixture for it, then iterate on the grammar.
+
+## History (files previously quarantined here and resolved)
 
 | File | Resolved in | Root cause + fix |
 | --- | --- | --- |
